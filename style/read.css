@@ -1,0 +1,21 @@
+#reading-sentence {
+    height: 25px;
+    width: 100%;
+    /* background-color: rgb(113, 113, 222); */
+    margin: auto;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#painter {
+    width: 800px;
+    height: 500px;
+    position: relative;
+    top: 50px;
+    margin: auto;
+}
+
+#reading-app {
+    width: 100%;
+}

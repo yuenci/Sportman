@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listen</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+
+    <script src="../script/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id="listen-app">
+        <div id="player-contanier">
+            <div class="gap-example">
+                <audio autoplay>
+                    <source id="listen-source" src="https://dict.youdao.com/dictvoice?audio=how+are+you&type=1"
+                        type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="../script/toolBar.js"></script>
+    <script type="module" src="../script/listening.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: "Microsoft YaHei";
+        }
+
+        .box {
+            background-color: white;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 600px;
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            font-family: "Microsoft YaHei";
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            box-shadow: 0 2px 16px #ddd;
+        }
+
+        .sentence-upper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            color: #8f9193;
+            font-size: 12px;
+            margin-bottom: 5px;
+            ;
+        }
+
+        .sentence-upper-btn {
+            font-size: 14px;
+        }
+
+        .sentence-upper-btn:hover {
+
+            cursor: pointer;
+        }
+
+        .sentence-upper-time:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="sentence-upper">
+            <div class="sentence-upper-time">2020-10-24 20:36:50</div>
+            <div class="sentence-upper-btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+        </div>
+        <div class="sentence-content">Above all, I'd like to thank my family.Above all, I'd like to thank my
+            family.Above all, I'd like to thank my family.Above all, I'd like to thank my family.Above all, I'd like to
+            thank my family.</div>
+    </div>
+</body>
+
+</html>

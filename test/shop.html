@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        #shop-container {
+            width: 300px;
+            height: 150px;
+            /* background-color: coral; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #9d9d9d;
+        }
+
+        .shop-item {
+            line-height: 37.5px;
+            background-color: #fafafa;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: 0px 20px;
+        }
+
+        .shop-item:hover {
+            cursor: pointer;
+            background-color: #efefef;
+        }
+
+        .shop-item-text {
+            display: inline-block;
+        }
+
+        .shop-item .fa {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="shop-container">
+        <div class="shop-item" id="shop-sportman">
+            <i class="fa fa-cube" aria-hidden="true"></i>
+            <div class="shop-item-text">SportMan</div>
+        </div>
+        <div class="shop-item" id="shop-lucky">
+            <i class="fa fa-gift" aria-hidden="true"></i>
+            <div class="shop-item-text">Get Lucky</div>
+        </div>
+        <div class="shop-item" id="shop-explore">
+            <i class="fa fa-binoculars" aria-hidden="true"></i>
+            <div class="shop-item-text">Explore</div>
+        </div>
+        <div class="shop-item" id="shop-dashboard">
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            <div class="shop-item-text">Dashboard</div>
+        </div>
+    </div>
+
+    <script>
+        function removeBGC() {
+            $(".shop-item").each(function () {
+                $(this).css({ "background-color": "#fafafa", "color": "#9d9d9d" })
+            });
+        }
+
+        $(".shop-item").each(function () {
+            $(this).click(function () {
+                removeBGC();
+                $(this).css({ "background-color": "blue", "color": "white" })
+            });
+        });
+
+        sportManClickEvent = function () {
+            console.log("sportManClickEvent hi");
+        }
+
+
+        document.querySelector("#shop-sportman").addEventListener("click", sportManClickEvent)
+
+
+
+    </script>
+</body>
+
+</html>

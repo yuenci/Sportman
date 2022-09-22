@@ -1,0 +1,87 @@
+#explains-word {
+    font-size: 25px;
+    width: 500px;
+    height: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+#explains-app {
+    overflow: auto;
+    height: 630px;
+}
+
+.ACTIV,
+.SYN,
+.OPP,
+.speaker,
+.cap,
+.FIELD {
+    display: none;
+}
+
+.sensenum {
+    font-size: 16px;
+}
+
+.newline {
+    margin: 10px 20px;
+}
+
+.DEF {
+    /* display: block; */
+    /* background-color: red; */
+    font-weight: bold;
+}
+
+.EXAMPLE .switch_children {
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+    border-left: solid 5px #c0c4c8;
+}
+
+
+.defRef {
+    color: black;
+    text-decoration: none;
+}
+
+.defRef:hover {
+    cursor: text;
+}
+
+.cn_txt {
+    display: none;
+}
+
+.cn_txt_show {
+    display: block;
+}
+
+img {
+    display: block;
+}
+
+.merge_sense {
+    color: rgb(109, 195, 223);
+}
+
+.REGISTERLAB,
+.GRAM {
+    border: 2px solid rgb(109, 195, 223);
+    margin: 2px 4px;
+    padding: 2px;
+}
+
+.SIGNPOST {
+    padding: 2px 6px;
+    display: inline-block;
+    background-color: rgb(109, 195, 223);
+    border-radius: 3px;
+}
+
+.assetlink,
+.asset_intro {
+    background-color: #91a7ff;
+}

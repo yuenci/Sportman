@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    overflow-x: hidden;
+    overflow-y: hidden
+}
+
+#test-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 50px;
+    background-color: palevioletred;
+    display: none;
+}
+
+#container {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 1200px;
+    /* background-color: aqua; */
+    margin: auto;
+    display: grid;
+    /* grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; */
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(15, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+#sidebox {
+    height: 100%;
+    width: 400px;
+    /* background-color: greenyellow; */
+    display: inline-block;
+    grid-area: 1 / 1 / 16 / 2;
+}
+
+#search-box {
+    /* background-color: gray; */
+    display: inline-block;
+    grid-area: 1 / 2 / 2 / 3;
+    position: relative;
+
+}
+
+#inbox-in {
+    /* background-color: rgb(175, 175, 175); */
+    display: inline-block;
+    grid-area: 2 / 2 / 5 / 3;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    position: relative;
+}
+
+#content {
+    /* border: solid rgb(218, 208, 208); */
+    grid-area: 5 / 2 / 16 / 3;
+    overflow: auto;
+    position: relative;
+    top: 10px;
+
+}
+
+#content::-webkit-scrollbar {
+    width: 6px;
+    background: #fafafa;
+}
+
+#content::-webkit-scrollbar-track {
+    border-radius: 2px;
+}
+
+#content:hover::-webkit-scrollbar-thumb {
+    /* background: #40a0ff; */
+    background: #40a0ff49;
+    border-radius: 10px;
+}
+
+
+
+.box:first-child {
+    margin-top: 0px;
+}
+
+#logo {
+    /* background-color: white; */
+    height: 30px;
+    margin: 10px;
+    position: relative;
+}
+
+#heatmap {
+    /* background-color: wheat; */
+    background-color: #fafafa;
+    height: 250px;
+    margin: 10px;
+}
+
+#shop {
+    /* background-color: rgb(211, 143, 15); */
+    background-color: #fafafa;
+    height: 150px;
+    margin: 10px;
+    position: relative;
+}
+
+#tags {
+    /* background-color: rgb(215, 179, 245); */
+    height: 460px;
+    margin: 10px;
+    position: relative;
+}

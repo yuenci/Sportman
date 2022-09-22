@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../script/jquery.min.js"></script>
+</head>
+
+<body>
+    <button onclick="pat()">Click me</button>
+    <script>
+        function pat() {
+            $.ajax({
+                type: "PATCH",
+                url: `http://localhost:5000/examples/duration`,
+                contentType: "application/x-www-form-urlencoded",
+                //speaking = 1000 WHERE examples =  'the people in the apartment above mine' AND word = 'above';
+                data: JSON.stringify(
+                    {
+                        "word": 'above',
+                        "example": 'the people in the apartment above mine',
+                        "type": "speaking",
+                        "duration": 999
+                    }
+                ),
+                success: function (data) {
+                    resolve(data);
+                },
+                contentType: "application/json",
+                dataType: 'json'
+            });
+        }
+    </script>
+</body>
+
+</html>

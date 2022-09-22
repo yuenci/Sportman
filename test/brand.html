@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="../script/jquery.min.js"></script>
+    <style>
+        #brand-container {
+            font-size: 18px;
+            font-weight: bold;
+            /* box-sizing: border-box; */
+            padding: 5px 5px;
+            transition: 0.3s;
+            width: 120px;
+            height: 25px;
+            display: inline-block;
+            color: #5f5f5f;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+
+        #brand-container:hover {
+            background-color: #efefef;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #brand-text {
+            display: inline-block;
+        }
+
+        .brand-sub-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            line-height: 25px;
+        }
+
+        .brand-sub-container .fa {
+            line-height: 25px;
+        }
+
+        .brand-sub1-hide {
+            display: none;
+        }
+
+        .brand-sub2-hide {
+            display: none;
+        }
+
+        #brand-slash,
+        #brand-tag-name {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f5f5f;
+            display: none;
+        }
+
+        #brand-slash {
+            color: #9d9d9d;
+        }
+
+        #brand-tag-name {
+            margin: 5px 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="brand">
+        <div id="brand-container">
+            <div class="brand-sub-container" id="brand-sub1">
+                <div id="brand-text">SportMan</div>
+                <i class="fa fa-refresh fa-sync" aria-hidden="true"></i>
+            </div>
+            <div class="brand-sub-container brand-sub2-hide" id="brand-sub2">
+                <div id="brand-sync-text">Syncing</div>
+                <i class="fa fa-refresh fa-spin" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div id="brand-slash">/</div>
+        <div id="brand-tag-name">Tag name here</div>
+    </div>
+
+
+    <br><br><br>
+
+    <button id="btn">CLick me</button>
+
+    <script>
+        let ifLoading = false;
+        let iftagShow = false;
+
+        $("#brand-container").click(function () {
+            brandSwithEvent()
+        })
+
+        $("#btn").click(function () {
+            tagClickEvent("11111");
+        })
+
+        function brandSwithEvent() {
+            if (iftagShow) {
+                hidetag()
+            }
+            $("#brand-sub1").toggleClass("brand-sub1-hide")
+            $("#brand-sub2").toggleClass("brand-sub2-hide")
+            ifLoading = !ifLoading
+        }
+        function hidetag() {
+            $(".fa-sync").show();
+            $("#brand-container").css("width", "120px");
+            $("#brand-slash").css("display", "none");
+            $("#brand-tag-name").css("display", "none")
+            $("#brand-container").css("padding", "5px 5px")
+            iftagShow = false;
+        }
+
+        function tagClickEvent(tagName) {
+            if (ifLoading) {
+                brandSwithEvent()
+            }
+            $(".fa-sync").hide();
+            $("#brand-tag-name").text(tagName)
+            $("#brand-container").css("width", "90px");
+            $("#brand-slash").css("display", "inline-block");
+            $("#brand-tag-name").css("display", "inline-block")
+            $("#brand-container").css("padding", "5px 3px")
+            iftagShow = true;
+        }
+    </script>
+</body>
+
+</html>

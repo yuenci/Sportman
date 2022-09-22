@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .drop {
+            cursor: pointer;
+            display: block;
+            background: #090;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+            /* hide the checkboxes */
+        }
+
+        input+.drop+div {
+            display: none;
+        }
+
+        /* .drop:after {
+            content: '▼';
+        }
+
+        :checked+.drop:after {
+            content: '▲';
+        } */
+
+        input:checked+.drop+div {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="_1" type="checkbox">
+    <label class="drop" for="_1">Collapse 1 </label>
+
+    <div>Content 1</div>
+</body>
+
+</html>

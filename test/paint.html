@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 50px;
+            height: 50px;
+        }
+
+        #box1 {
+            width: 100%;
+            height: 2px;
+            background: #000;
+            margin-top: 12px;
+        }
+
+        #box2 {
+            width: 100%;
+            height: 6px;
+            background: #000;
+            margin-top: 12px;
+        }
+
+        #box3 {
+            width: 100%;
+            height: 10px;
+            background: #000;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="color" id="color1" /><br />
+    <div id="box">
+        <div id="box1"></div>
+        <div id="box2"></div>
+        <div id="box3"></div>
+    </div>
+    <canvas id="myCanvas" width="800" height="600" style="border: 1px solid #000; margin-left: 100px;"></canvas>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var oColor = document.getElementById('color1');
+        var box = document.getElementById('box');
+        var x, y;
+        var color;
+        var w;
+        oColor.onchange = function () {
+            color = this.value;
+        }
+        box.children[0].onclick = function () { w = 2; }
+        box.children[1].onclick = function () { w = 6; }
+        box.children[2].onclick = function () { w = 10; }
+        c.onmousedown = function (ev) {
+            x = ev.offsetX;
+            y = ev.offsetY;
+            c.onmousemove = function (e) {
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                x = e.offsetX;
+                y = e.offsetY;
+                ctx.strokeStyle = color;
+                ctx.lineWidth = w;
+                ctx.stroke();
+
+            }
+        }
+        c.onmouseup = function () {
+            c.onmousemove = function () {
+            }
+        }
+
+    </script>
+</body>
+
+</html>

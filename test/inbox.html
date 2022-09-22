@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../script/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        #inbox {
+            width: 600px;
+            /* height: 160px; */
+            /* background-color: rgb(4, 118, 118); */
+            border: 1px solid #e8e8e8;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* #inbox:has(:focus) {
+            box-shadow: 0 2px 16px lightblue;
+        } */
+
+        #inbox-ta {
+            box-sizing: border-box;
+            width: 100%;
+            height: 120px;
+            border: none;
+            background-color: white;
+            padding: 0;
+            resize: none;
+            padding: 15px;
+            padding-bottom: 5px;
+            font-size: 18px;
+            margin: 0;
+            /* line-height: 150%; */
+            overflow: hidden;
+        }
+
+        #inbox-ta:focus {
+            outline: none;
+        }
+
+        #inbox-toolbar {
+            width: 100%;
+            height: 40px;
+            padding: 0;
+            margin: 0;
+        }
+
+        #inbox-toolbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #inbox-tools-container {
+            width: 200px;
+            margin-left: 15px;
+        }
+
+        #enter-btn {
+            width: 45px;
+            height: 27px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+            background-color: #cecece;
+        }
+
+        #enter-btn:hover {
+            cursor: pointer;
+        }
+
+        .fa-paper-plane {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="inbox">
+        <textarea name="" id="inbox-ta"></textarea>
+        <div id="inbox-toolbar">
+            <div id="inbox-tools-container">
+                <button>👆</button>
+                <button>👆</button>
+            </div>
+            <button id="enter-btn">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <script>
+        $("#inbox-ta")
+            .focus(function () {
+                $("#inbox").css("box-shadow", "0 2px 16px lightblue");
+            })
+            .blur(function () {
+                $("#inbox").css("box-shadow", "none");
+            });
+
+
+        $("#inbox-ta").on('input propertychange', function () {
+            if ($(this).val()) {
+                //限制长度
+                let maxchara = 378;
+                if ($(this).val().length > maxchara) {
+                    let limitword = $(this).val().substring(0, maxchara);
+                    $("#inbox-ta").val(limitword);
+                }
+
+                //按钮亮起
+                $("#enter-btn").css("background-color", "blue")
+
+
+                if ($(this).get(0).scrollHeight > 120) {
+                    $(this).height(0);
+                    $(this).height(this.scrollHeight);
+                } else {
+                    // $(this).height(90);
+                }
+            } else {
+                $("#enter-btn").css("background-color", "#cecece")
+                // $(this).height(90);
+            }
+        })
+
+    </script>
+</body>
+
+</html>
