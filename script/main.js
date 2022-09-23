@@ -20,7 +20,7 @@ new Heatmap();
 //tags
 import { TagM } from "./tagManager.js";
 let tagM = new TagM()
-tagM.addTagItem("tag", "tag");
+// tagM.addTagItem("tag", "tag");
 
 //searchBox
 import { SearchBox } from "./searchBox.js";

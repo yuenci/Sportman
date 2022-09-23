@@ -157,6 +157,7 @@ class dictionary {
     }
 
     static async querySentenceFromDB(keyword) {
+        console.log("query tags from DB");
         let data = await Http.getRequeste(
             "/sentences/query",
             { "type": "word", "word": keyword }
@@ -203,6 +204,8 @@ class dictionary {
             "/tags",
             { "tag": tagName }
         )
+        console.log("tag Post Data 👇");
+        console.log(data);
         return data
     }
 
@@ -230,13 +233,13 @@ class dictionary {
         return data
     }
 
-    static async getAllTags() {
-        let data = await Http.getRequeste(
-            "/tags",
-            { "type": "tag" }
-        )
-        return data
-    }
+    // static async getAllTags() {
+    //     let data = await Http.getRequeste(
+    //         "/tags",
+    //         { "type": "tag" }
+    //     )
+    //     return data
+    // }
 
     static async getLucky() {
         let data = await Http.getRequeste(

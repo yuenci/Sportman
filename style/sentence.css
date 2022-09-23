@@ -42,7 +42,7 @@
 
 .main-word:hover {
     background-color: lightpink;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .tag {

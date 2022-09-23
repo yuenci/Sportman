@@ -12,7 +12,6 @@ class TagM {
             this.content = Html.tagManager;
             this.create();
             TagM.instance = this;
-
         }
         return TagM.instance;
 

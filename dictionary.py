@@ -561,7 +561,7 @@ def getHeatMapData():
 def getLearningData():
     sql1 = "SELECT COUNT(*) FROM inbox_sentences ;"
     sql2 = "SELECT ROUND(SUM(listening + speaking + reading +writing)/60)  FROM examples_data;"
-    sql3 = "SELECT create_time FROM logs"
+    sql3 = "SELECT COUNT( DISTINCT DATE(create_time)) FROM logs"
 
     res = {
         "sens": 0,
@@ -584,8 +584,7 @@ def getLearningData():
 
         cursor.execute(sql3)
         dayturple = cursor.fetchall()
-        dayList = list(str(ele[0])[:10] for ele in dayturple)
-        daysNum = len(Counter(dayList).keys())
+        daysNum = dayturple[0][0]
         # print(result)
         res["day"] = daysNum
 
