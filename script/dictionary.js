@@ -248,6 +248,14 @@ class dictionary {
         )
         return data
     }
+
+    static async putCachePosition(position) {
+        let data = await Http.putRequeste(
+            "/configs",
+            { "position": position }
+        )
+        return data
+    }
 }
 
 export { dictionary };

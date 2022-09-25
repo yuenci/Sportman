@@ -27,6 +27,10 @@ class Shop {
         document.querySelector("#shop-sportman").addEventListener("click", this.sportManClickEvent)
 
         document.querySelector("#shop-lucky").addEventListener("click", this.getLuckyClickEvent)
+
+        document.querySelector("#shop-explore").addEventListener("click", this.exploreClickEvent)
+
+        document.querySelector("#shop-plugin").addEventListener("click", this.pluginClickEvent)
     }
 
 
@@ -41,6 +45,14 @@ class Shop {
 
             Content.showLucky(text, datetime);
         })
+    }
+
+    exploreClickEvent() {
+        console.log("hi explore")
+    }
+
+    pluginClickEvent() {
+        console.log("hi plugin")
     }
 }
 

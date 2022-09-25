@@ -1,0 +1,8 @@
+Example endpoint returning a list of colors by palette
+In this example the specification is taken from external YAML file lalalla
+---
+responses:
+  200:
+    description: A list of colors 666 (may be filtered by palette)
+    examples:
+      rgb: ['red', 'green', 'blue']

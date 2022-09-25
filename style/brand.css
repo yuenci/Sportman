@@ -19,7 +19,7 @@
  }
 
  #brand-container:hover {
-     background-color: #efefef;
+     background-color: var(--bcolor-gray-secondary);
      cursor: pointer;
      border-radius: 5px;
  }
@@ -54,7 +54,7 @@
  }
 
  #brand-slash {
-     color: #9d9d9d;
+     color: var(--wcolor-gray-primary);
  }
 
  #brand-tag-name {

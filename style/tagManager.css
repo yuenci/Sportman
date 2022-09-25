@@ -5,7 +5,7 @@
     /* background-color: lightblue; */
     box-sizing: border-box;
     /* padding: 10px; */
-    color: #9d9d9d;
+    color: var(--wcolor-gray-primary);
     position: absolute;
     left: 40px;
     overflow: auto;
@@ -33,7 +33,7 @@
 }
 
 #tag-trash:hover {
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -62,7 +62,7 @@
 }
 
 .tag-item:hover {
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
     border-radius: 5px;
     cursor: pointer;
 }

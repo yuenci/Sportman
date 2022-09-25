@@ -1,0 +1,40 @@
+ .menu-ul {
+     display: inline-block;
+     width: 180px;
+     background-color: white;
+     list-style: none;
+     margin: 0px;
+     box-sizing: border-box;
+     padding: 0;
+ }
+
+ .menu-ul li {
+     margin: 10px 10px;
+     /* background-color: blue; */
+     transition: 0.3s;
+ }
+
+ .menu-ul li:hover {
+     cursor: pointer;
+     color: cornflowerblue;
+ }
+
+ .menu-ul hr {
+     border: none;
+     height: 1px;
+     background-color: #dcdfe6;
+ }
+
+ .layui-layer {
+     box-shadow: 1px 1px 10px rgba(0, 0, 0, .1) !important;
+ }
+
+ #search-menu {
+     width: 250px;
+ }
+
+ .layui-layer-btn0 {
+     background-color: #ad2121 !important;
+     color: white !important;
+     border: none !important;
+ }

@@ -1,0 +1,10 @@
+#rlayer {
+    width: 765px;
+    height: 875px;
+    background-color: #fafafa;
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    z-index: 999;
+}

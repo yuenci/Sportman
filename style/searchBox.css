@@ -2,13 +2,13 @@
     width: 250px;
     height: 45px;
     border-radius: 8px;
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 10px;
-    color: #9d9d9d;
+    color: var(--wcolor-gray-primary);
     position: absolute;
     top: 7px;
     right: 20px;
@@ -18,7 +18,7 @@
     width: 180px;
     border: none;
     outline: none;
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
     color: #606266;
 }
 

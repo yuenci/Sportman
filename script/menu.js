@@ -1,5 +1,6 @@
 import "../style/menuStyle.css"
 import { TagM } from "./tagManager.js";
+import { LogoButton } from "./logoBtn.js";
 
 class Menu {
     // tools
@@ -61,7 +62,7 @@ class Menu {
             offset: [`${$btnObj.offset().top + 50}px `, `${$btnObj.offset().left}px`],
             content: `
                         <ul class="menu-ul">
-                            <li>111111111111</li>
+                            <li id="logo-menu-account">Account</li>
                             <li>222222222222</li>
                             <li>333333333333</li>
                         </ul>
@@ -71,6 +72,19 @@ class Menu {
 
         return config;
     }
+
+    static logoMenuClickEvent() {
+        this.clickEventRegister("#logo-menu-account",
+            () =>LogoButton.showAccountSetting()
+        );
+        // this.clickEventRegister("#tag-menu-set-icon",
+        //     () => console.log("hi from tag-menu-set-icon")
+        // );
+        // this.clickEventRegister("#tag-menu-del",
+        //     () => TagM.deleteTagItem()
+        // );
+    }
+
 
     static sentenceMenu($btnObj) {
         let config = {

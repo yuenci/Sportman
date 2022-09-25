@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #9d9d9d;
+    color: var(--wcolor-gray-primary);
     position: absolute;
     left: 40px;
     bottom: 5px;
@@ -21,7 +21,7 @@
 
 .shop-item:hover {
     cursor: pointer;
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
 }
 
 .shop-item-active {
@@ -30,9 +30,9 @@
 }
 
 .shop-item-active:hover {
-    color: #9d9d9d;
+    color: var(--wcolor-gray-primary);
     cursor: pointer;
-    background-color: #efefef;
+    background-color: var(--bcolor-gray-secondary);
 }
 
 .shop-item-text {

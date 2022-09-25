@@ -3,27 +3,28 @@ import '../style/rlayer.css'
 class Rlayer {
     constructor() {
         if (!Rlayer.instance) {
+            this.showStatus = false;
             Rlayer.instance = this;
         }
         return Rlayer.instance;
     }
 
     show() {
-        // $("#inbox-in").empty();
-        // $("#content").empty();
         let rlayer = document.querySelector("#rlayer");
         if (!rlayer) {
             let $rlayer = $(`<div id="rlayer"></div>`);
             $("#inbox-in").append($rlayer);
-            console.log("hi");
+            this.showStatus = true;
         } else {
-            rlayer.remove()
-            console.log("bye");
+            this.remove();
         }
     }
 
     remove() {
-
+        if (this.showStatus) {
+            $("#rlayer").remove();
+            this.showStatus = false;
+        }
     }
 }
 

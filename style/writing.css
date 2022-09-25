@@ -46,7 +46,7 @@ textarea {
     margin-bottom: 10px;
     width: 100%;
     border: 1px solid #C7C7C7;
-    background-color: #fafafa;
+    background-color: var(--bcolor-gray-primary);
     -webkit-transition: background-color .3s, border-color .4s;
     -moz-transition: background-color .3s, border-color .4s;
     -o-transition: background-color .3s, border-color .4s;

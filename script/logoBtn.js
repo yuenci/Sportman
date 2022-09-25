@@ -1,6 +1,9 @@
 import '../style/logoBtn.css'
+
 import { Menu } from "../script/menu"
 import { Html } from "../script/htmlContent"
+import { Rlayer } from "./rightlayer"
+import { LogoMAccount } from "./logoMenuAccount"
 
 class LogoButton {
     constructor() {
@@ -17,6 +20,7 @@ class LogoButton {
             e.stopPropagation();
             if (!layerIndex) {
                 let index = layer.open(Menu.logoMenu($(this)))
+                Menu.logoMenuClickEvent();
                 layerIndex = index;
             }
             else {
@@ -33,7 +37,11 @@ class LogoButton {
         });
     }
 
-
+    static showAccountSetting() {
+        new Rlayer().show();
+        $("#rlayer").append($(`${Html.logoMenuAccount()}`))
+        new LogoMAccount();
+    }
 }
 
 export { LogoButton };

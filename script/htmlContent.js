@@ -14,9 +14,9 @@ class Html {
                 <i class="fa fa-binoculars" aria-hidden="true"></i>
                 <div class="shop-item-text">Explore</div>
             </div>
-            <div class="shop-item" id="shop-dashboard">
+            <div class="shop-item" id="shop-plugin">
                 <i class="fa fa-tachometer" aria-hidden="true"></i>
-                <div class="shop-item-text">Dashboard</div>
+                <div class="shop-item-text">Plugins</div>
             </div>
         </div>
     `;
@@ -158,18 +158,118 @@ class Html {
             </div>
     `;
 
+    // static sentence(sen, time) {
+    //     return `<div class="box">
+    //     <div class="sentence-upper">
+    //         <div class="sentence-upper-time">${time}</div>
+    //         <div class="sentence-upper-menu-btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+    //     </div>
+    //     <div class="sentence-content">${TP.splitSenToWords(sen)}</div>
+    //     </div>
+    // `;
+    // }
+
     static sentence(sen, time) {
         return `<div class="box">
         <div class="sentence-upper">
             <div class="sentence-upper-time">${time}</div>
             <div class="sentence-upper-menu-btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
         </div>
-        <div class="sentence-content">${TP.splitSenToWords(sen)}</div>
+        <div class="sentence-content">${TP.tokenize(sen)}</div>
         </div>
     `;
     }
 
+    static logoMenuAccount() {
+        return `
+            <div id="account-container">
+                <div class="account-title">Personal Infomation</div>
+                <div class="pi-items">
+                    <span class="pi-title">Account:</span>
+                    <span class="pi-content">1575270674@qq.com</span>
+                    <span class="pi-change" id="pi-change-account">Change account</span>
+                </div>
+                <div class="pi-items">
+                    <span class="pi-title">Membership:</span>
+                    <span class="pi-content">Pro</span>
+                    <span class="pi-change" id="pi-change-renew">Renew PRO now</span>
+                </div>
+                <div class="pi-items">
+                    <span class="pi-title">Password:</span>
+                    <span></span>
+                    <span class="pi-change" id="pi-change-passsword">Change password</span>
+                </div>
+                <div class="pi-items">
+                    <span class="pi-title">Username:</span>
+                    <input type="text" value="Innis" id="pi-name-input">
+                    <button id="pi-change-btn" id="pi-change-save">Save</button>
+                </div>
+            </div>
 
+            <div id="preferences-container">
+                <div class="account-title">Preferences</div>
+                <div class="pc-items">
+                    <span class="pc-title">Appearance</span>
+                    <div class="pc-select">
+                        <select id="pc-appearance">
+                            <option value="auto">Auto</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+            </div>
+
+            <div class="pc-items">
+                <span class="pc-title">Language</span>
+                <div class="pc-select">
+                    <select id="pc-language">
+                        <option value="english">English</option>
+                        <option value="chinese">Chinese</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="pc-items">
+                <span class="pc-title">Zen Mode</span>
+                <div class="pc-select">
+                    <select id="pc-zen">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="pc-items">
+                <span class="pc-title">Cache Mode</span>
+                <div class="pc-select">
+                    <select id="pc-cache">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="data-contaier">
+            <div class="account-title">Data</div>
+            <div class="dc-items">
+                <span class="dc-title">Cache</span>
+                <span class="dc-position">C:\\Users\\Innis\\Documents\\sportman</span>
+                <button id="dc-item-position">Choose position</button>
+            </div>
+            <div class="dc-items">
+                <span class="dc-title">Delete all data</span>
+                <button id="dc-item-delete">Delete</button>
+            </div>
+        </div>
+
+        <div id="delete-contaier">
+            <div class="account-title">Account Cancellation</div>
+            <button id="dc-item-cancel">Cancel my aacount and delete all data</button>
+        </div>
+        `;
+    }
 }
 
 export { Html };

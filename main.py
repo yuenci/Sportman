@@ -1,14 +1,18 @@
 from flask_cors import CORS
 from flask import Flask, request
+from flasgger import Swagger
+from flasgger import swag_from
 import dictionary
 
 
 app = Flask(__name__)
+swagger = Swagger(app)
 CORS(app, resources=r'/*')
 # 获得数据库中的句子
 
 
 @app.route('/sentences', methods=["GET"])
+@swag_from('./server/API/color.yml')
 def getSen():
     dict = dictionary.getAllSentence()
     return dict
@@ -171,6 +175,15 @@ def deleteTag():
     jsonData = request.json
     tag = jsonData["tag"]
     dict = dictionary.deleteTag(tag)
+    return dict
+
+
+@app.route('/configs', methods=["PUT"])
+def putCachePosition():
+    jsonData = request.json
+    position = jsonData["position"]
+    print("🗺️ router>" + position)
+    dict = dictionary.putCachePositionToFile(position)
     return dict
 
 

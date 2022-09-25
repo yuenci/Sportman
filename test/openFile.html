@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>efonmark</title>
+
+</head>
+
+<body>
+    <input type="file" id="inputfile" accept="text/plain" />
+    <script>
+        const inputFile = document.getElementById('inputfile');
+        inputFile.onchange = function () {
+            let url = null;
+            let fileObj = document.getElementById("inputfile").files[0];
+            if (window.createObjcectURL != undefined) {
+                url = window.createOjcectURL(fileObj);
+            } else if (window.URL != undefined) {
+                url = window.URL.createObjectURL(fileObj);
+            } else if (window.webkitURL != undefined) {
+                url = window.webkitURL.createObjectURL(fileObj);
+            }
+            console.log(url)
+        }
+    </script>
+</body>
+
+</html>

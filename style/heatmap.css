@@ -27,7 +27,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    color: #9d9d9d;
+    color: var(--wcolor-gray-primary);
 }
 
 .data-num {

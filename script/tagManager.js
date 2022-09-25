@@ -44,35 +44,6 @@ class TagM {
             item.addEventListener("click", () => this.addTagItem("tag", "new item"))
         })
 
-        //测试：添加pined 的事件
-        // document.querySelectorAll("#tagM-title1").forEach(item => {
-        //     // item.addEventListener("click", () => this.addTagItem("pined", "new item"))
-        // })
-
-        //post
-        // document.querySelector("#tagM-title1").addEventListener("click",
-        //     () => dictionary.postNewTag("3hhhhhha").then(data => {
-        //         console.log(data)
-        //     }));
-
-        //get
-        // document.querySelector("#tagM-title1").addEventListener("click",
-        //     () => dictionary.getTagList().then(data => {
-        //         console.log(data)
-        //     }));
-
-        //update
-        // document.querySelector("#tagM-title1").addEventListener("click",
-        //     () => dictionary.updateTagPinStatus("3hhhhhha", "1").then(data => {
-        //         console.log(data)
-        //     }));
-
-        //delete
-        // document.querySelector("#tagM-title1").addEventListener("click",
-        //     () => dictionary.deleteTag("3hhhhhha").then(data => {
-        //         console.log(data)
-        //     }));
-
 
     }
 

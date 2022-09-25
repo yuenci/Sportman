@@ -2,6 +2,8 @@ import { sentence } from "./sentenceObj.js"
 import { dictionary } from "./dictionary.js"
 import { Content } from './contentObj'
 import { Log } from './logging'
+import { Html } from './htmlContent'
+import { LogoMAccount } from './logoMenuAccount'
 
 // login log
 Log.loginLog();
@@ -40,10 +42,14 @@ new Shop();
 
 //Rlayer
 import { Rlayer } from "./rightlayer.js";
+import { Http } from "./http.js"
+new Rlayer().show();
+$("#rlayer").append($(`${Html.logoMenuAccount()}`))
+new LogoMAccount();
 
-$("#test-btn").click(function () {
-    new Rlayer().show();
-});
+// $("#test-btn").click(function () {
+    
+// });
 
 
 

@@ -1,0 +1,17 @@
+/* .green-audio-player {
+    position: relative;
+    top: 100px;
+    left: 250px;
+} */
+
+
+#listen-app {
+    width: 100%;
+}
+
+#player-contanier {
+    width: 400px;
+    margin: auto;
+    position: relative;
+    top: 100px;
+}

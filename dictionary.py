@@ -11,6 +11,7 @@ import random
 import time
 from collections import Counter
 import DB
+import os
 
 
 '''获取一个sql 连接
@@ -646,3 +647,28 @@ def updateTag(jsonData):
         return {"msg": "success"}
     else:
         return {"error": "can't update tag from DB"}
+
+
+def putCachePositionToFile(position):
+    with open("./config.py", "r") as f:
+        data = f.readlines()
+    newData = []
+    for ele in data:
+        if "cache_dir" in ele:
+            try:
+                if not os.path.exists(position):
+                    print("path not exist")
+                    os.makedirs(position)
+                ele = f"cache_dir = '{position}'\n"
+                newData.append(ele)
+            except:
+                return {"msg": "failed"}
+        else:
+            newData.append(ele)
+    with open("./config.py", "w") as f:
+        f.write("".join(newData))
+        print("success")
+        return {"msg": "success"}
+
+
+# putCachePositionToFile(r"E:\test")

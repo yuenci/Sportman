@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        #account-container,
+        #preferences-container,
+        #data-contaier,
+        #delete-contaier {
+            width: 765px;
+            /* background-color: #fafafa; */
+            background-color: white;
+            border-radius: 6px;
+            box-sizing: border-box;
+            padding: 10px 30px;
+            margin-bottom: 20px;
+        }
+
+        .account-title {
+            color: #999;
+            font-size: 14px;
+            margin: 20px 0px;
+        }
+
+        .pi-items {
+            color: 16px;
+            font-size: 16px;
+            margin: 10px 0px;
+        }
+
+        .pi-items span {
+            margin-right: 10px;
+        }
+
+        .pi-change {
+            color: #409eff;
+            font-weight: bold;
+        }
+
+        #pi-name-input {
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #dcdfe6;
+            box-sizing: border-box;
+            color: #606266;
+            display: inline-block;
+            font-size: inherit;
+            height: 30px;
+            line-height: 30px;
+            outline: 0;
+            padding: 0 15px;
+            transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+            width: 200px;
+            margin-left: 15px;
+        }
+
+        #pi-name-input:focus {
+            border-color: #409eff;
+        }
+
+        #pi-change-btn,
+        #dc-item-position,
+        #dc-item-delete,
+        #dc-item-cancel {
+            color: #409eff;
+            background: #ecf5ff;
+            border: 1px solid #b3d8ff;
+            padding: 9px 15px;
+            font-size: 12px;
+            border-radius: 3px;
+            height: 30px;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        #dc-item-delete,
+        #dc-item-cancel {
+            color: #f56c6c;
+            background: #fef0f0;
+            border-color: #fbc4c4;
+            margin-left: 0;
+            height: 36px;
+        }
+
+        #dc-item-delete {
+            height: 30px;
+        }
+
+        #pi-change-btn:hover,
+        #dc-item-position:hover,
+        #dc-item-delete:hover {
+            background-color: #409eff;
+            color: white;
+        }
+
+        #dc-item-delete:hover,
+        #dc-item-cancel:hover {
+            background-color: #f56c6c;
+            color: white;
+        }
+
+        .pc-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px 0px;
+        }
+
+        .pc-select {
+            display: inline-block;
+
+        }
+
+        .pc-select select {
+            padding: 0 5px;
+            font-size: 12px !important;
+            color: #9d9d9d !important;
+            border-radius: 3px;
+            height: 32px;
+            line-height: 32px;
+            outline: 0;
+            border: 1px solid #dcdfe6;
+            transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        }
+
+        .dc-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="account-container">
+        <div class="account-title">Personal Infomation</div>
+        <div class="pi-items">
+            <span class="pi-title">Account:</span>
+            <span class="pi-content">1575270674@qq.com</span>
+            <span class="pi-change">Change account</span>
+        </div>
+        <div class="pi-items">
+            <span class="pi-title">Membership:</span>
+            <span class="pi-content">Pro</span>
+            <span class="pi-change">Renew PRO now</span>
+        </div>
+        <div class="pi-items">
+            <span class="pi-title">Password:</span>
+            <span></span>
+            <span class="pi-change">Change password</span>
+        </div>
+        <div class="pi-items">
+            <span class="pi-title">Account:</span>
+            <input type="text" value="Innis" id="pi-name-input">
+            <button id="pi-change-btn">Save</button>
+        </div>
+    </div>
+
+    <div id="preferences-container">
+        <div class="account-title">Preferences</div>
+        <div class="pc-items">
+            <span class="pc-title">Appearance</span>
+            <div class="pc-select">
+                <select>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pc-items">
+            <span class="pc-title">Appearance</span>
+            <div class="pc-select">
+                <select>
+                    <option value="volvo">Auto</option>
+                    <option value="saab">Light</option>
+                    <option value="opel">Dark</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pc-items">
+            <span class="pc-title">Language</span>
+            <div class="pc-select">
+                <select>
+                    <option value="volvo">English</option>
+                    <option value="saab">Chinese</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pc-items">
+            <span class="pc-title">Zen Mode</span>
+            <div class="pc-select">
+                <select>
+                    <option value="volvo">Off</option>
+                    <option value="saab">On</option>
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="data-contaier">
+        <div class="account-title">Data</div>
+        <div class="dc-items">
+            <span class="dc-title">Cache</span>
+            <button id="dc-item-position">Choose position</button>
+        </div>
+        <div class="dc-items">
+            <span class="dc-title">Delete all data</span>
+            <button id="dc-item-delete">Delete</button>
+        </div>
+    </div>
+
+    <div id="delete-contaier">
+        <div class="account-title">Account Cancellation</div>
+        <button id="dc-item-cancel">Cancel my aacount and delete all data</button>
+    </div>
+</body>
+
+</html>

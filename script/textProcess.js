@@ -41,10 +41,13 @@ class TP {
         return res.join(" ");
     }
 
+
     static senUrlFormat(sentence) {
         let args = sentence.split(" ");
         return args.join("+");
     }
+
+
 }
 
 

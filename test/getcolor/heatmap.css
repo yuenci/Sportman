@@ -1,0 +1,47 @@
+#heatmap-containet {
+    height: 240px;
+    width: 300px;
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    padding: 10px;
+    /* background-color: chartreuse; */
+    margin-left: 40px;
+    position: relative;
+    top: 10px;
+}
+
+.graph-label {
+    font-size: 15px !important;
+}
+
+#learn-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: #9d9d9d;
+}
+
+.data-num {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.data-title {
+    font-size: 10px;
+}
+
+
+
+.highlight {
+    stroke: blue !important;
+    stroke-width: 1 !important;
+}
