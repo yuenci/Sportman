@@ -158,8 +158,8 @@ def getTag():
 @app.route('/tags', methods=["POST"])
 def postTag():
     jsonData = request.json
-    tag = jsonData["tag"]
-    dict = dictionary.postTag(tag)
+    tagList = jsonData["tag"]
+    dict = dictionary.postTag(tagList)
     return dict
 
 

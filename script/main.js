@@ -43,9 +43,9 @@ new Shop();
 //Rlayer
 import { Rlayer } from "./rightlayer.js";
 import { Http } from "./http.js"
-new Rlayer().show();
-$("#rlayer").append($(`${Html.logoMenuAccount()}`))
-new LogoMAccount();
+// new Rlayer().show();
+// $("#rlayer").append($(`${Html.logoMenuAccount()}`))
+// new LogoMAccount();
 
 // $("#test-btn").click(function () {
     

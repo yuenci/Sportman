@@ -1,4 +1,3 @@
-from traceback import print_tb
 from faker import Faker
 import pickle
 import pymysql
@@ -12,6 +11,7 @@ import time
 from collections import Counter
 import DB
 import os
+import config
 
 
 '''获取一个sql 连接
@@ -201,6 +201,44 @@ def queryData(word):
 
 
 def getExplain(word):
+    word = word.lower()
+    cachePosition = config.cache_dir
+    cacheFile = cachePosition + "\\" + word + ".pkl"
+    filePathsList = os.listdir(cachePosition)
+    fileName = word + ".pkl"
+    if fileName in filePathsList:
+        f = open(cacheFile, 'rb')
+        data = pickle.loads(f.read())
+        f.close()
+        return data
+    filename = "dictMdx/LDOCE5.mdx"
+    headwords = [*MDX(filename)]       # 单词名列表
+    items = [*MDX(filename).items()]   # 释义html源码列表
+    if len(headwords) == len(items):
+        print(f'加载成功：共{len(headwords)}条')
+    else:
+        print(f'【ERROR】加载失败{len(headwords)}，{len(items)}')
+    queryWord = word
+    try:
+        wordIndex = headwords.index(queryWord.encode())
+    except:
+        return {"msg": "word doesn't exist"}
+    word, html = items[wordIndex]
+    word, html = word.decode(), html.decode()
+    soup = BeautifulSoup(html, 'lxml')
+    allSpan = soup.find_all(attrs={'class': 'newline'})
+    jsonData = json.dumps([str(ele) for ele in allSpan])
+
+    f = open(f"{cacheFile}", 'wb')
+    print(cacheFile)
+    content = pickle.dumps(jsonData)
+    f.write(content)
+    f.close()
+
+    return jsonData
+
+
+def getExplain11(word):
 
     # 加载mdx文件
     filename = "dictMdx/LDOCE5.mdx"
@@ -232,6 +270,8 @@ def getExplain(word):
     content = pickle.dumps(jsonData)
     f.write(content)
     f.close()
+    with open(f"{word}.json", "w+") as f:
+        f.write(jsonData)
     return jsonData
 
 
@@ -394,7 +434,7 @@ def getAllSentence():
         data = cursor.fetchall()
         newData = []
         for ele in data:
-            newData.append([ele[0], str(ele[1])])
+            newData.append([decodeText(ele[0]), str(ele[1])])
         # data = [list(ele) for ele in data]
         return {"data": newData}
     except pymysql.Error as e:
@@ -409,12 +449,8 @@ def getAllSentence():
 def postSentencesToDB(sentence):
     conn = getConn()
     cursor = conn.cursor()
+    sentence = encodeText(sentence)
     sql = f"INSERT INTO inbox_sentences (sentence) VALUES ('{sentence}');"
-
-    words = sentence.split(" ")
-    for word in words:
-        if word[0] == "#":
-            storeTagToDB(word)
 
     try:
         cursor.execute(sql)
@@ -612,12 +648,13 @@ def getTag():
     return dictData
 
 
-def postTag(tag):
-    res = DB.insert(
-        tableName="tags",
-        colNames=["tag"],
-        values=[[tag]]
-    )
+def postTag(tagList):
+    for tag in tagList:
+        res = DB.insert(
+            tableName="tags",
+            colNames=["tag"],
+            values=[[tag]]
+        )
     if(res):
         return {"msg": "success"}
     else:

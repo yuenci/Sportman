@@ -44,13 +44,29 @@ class sentence {
             })
         })
 
-        //给tag 添加事件
-        $sen.find(".tag").each(function () {
+        //给纯tag 添加事件
+        $sen.find(".main-word-tag").each(function () {
             let $senJQObj = $(this);
             let text = $senJQObj.text();
             let textWithoutPound = text.substring(1, text.length);
             $senJQObj.unbind();
             $senJQObj.click(function () {
+                //console.log(textWithoutPound);
+                Content.queryAllDESC(text);
+                let brand = new Brand();
+                brand.showTag(textWithoutPound)
+            })
+        })
+
+        //给有末尾符号的tag 添加事件
+        $sen.find(".main-word-tag-punc").each(function () {
+            let $senJQObj = $(this);
+            let text = $senJQObj.text();
+            console.log(text);
+            let textWithoutPound = text.substring(1, text.length - 1);
+            $senJQObj.unbind();
+            $senJQObj.click(function () {
+                //console.log(textWithoutPound);
                 Content.queryAllDESC(text);
                 let brand = new Brand();
                 brand.showTag(textWithoutPound)

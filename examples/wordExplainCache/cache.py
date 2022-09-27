@@ -10,12 +10,13 @@ import time
 def getExplain(word):
     cachePosition = "examples\wordExplainCache"
 
-    cacheFile = cachePosition + "\\" + word.lower() + ".json"
+    cacheFile = cachePosition + "\\" + word.lower() + ".pkl"
     filePathsList = os.listdir(cachePosition)
-    fileName = word + ".json"
+    fileName = word + ".pkl"
     if fileName in filePathsList:
-        with open(cachePosition + "\\" + fileName, "r+") as f:
-            return json.load(f)
+        f = open(cacheFile, 'rb')
+        data = pickle.loads(f.read())
+        f.close()
     filename = "dictMdx/LDOCE5.mdx"
     headwords = [*MDX(filename)]       # 单词名列表
     items = [*MDX(filename).items()]   # 释义html源码列表
@@ -30,12 +31,13 @@ def getExplain(word):
     soup = BeautifulSoup(html, 'lxml')
     allSpan = soup.find_all(attrs={'class': 'newline'})
     jsonData = json.dumps([str(ele) for ele in allSpan])
-    f = open('jsn.pkl', 'wb')
+
+    f = open(f"{cacheFile}", 'wb')
+    print(cacheFile)
     content = pickle.dumps(jsonData)
     f.write(content)
     f.close()
-    with open(f"{cacheFile}", "w+") as f:
-        f.write(jsonData)
+
     return jsonData
 
 

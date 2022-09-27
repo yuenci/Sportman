@@ -8,6 +8,6 @@ default_setting = {
     "cache": False,
     "cache_dir": os.getcwd()+"\cache",
 }
-cache_dir = r'C:\Users\Innis\Documents\sportman'
+cache_dir = r'cache\explains'
 
 print(default_setting["cache_dir"])

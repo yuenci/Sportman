@@ -3,7 +3,8 @@ import { dictionary } from './dictionary'
 import { Tools } from './toolShop'
 import { sentence } from './sentenceObj'
 import { Content } from './contentObj'
-import { Html } from "../script/htmlContent"
+import { Html } from "./htmlContent"
+import { TP } from './textProcess'
 
 class Inbox {
     constructor() {
@@ -49,7 +50,19 @@ class Inbox {
 
         $("#enter-btn").click(function () {
             let inboxValue = $("#inbox-ta").val()
+            let inboxWords = inboxValue.split(" ")
+            let inboxWordsWithoutPound = []
+            for (const word of inboxWords) {
+                let wordWithoutPound = TP.tagCheck(word)
+                if (wordWithoutPound) {
+                    inboxWordsWithoutPound.push(wordWithoutPound)
+                }
+            }
+
             if (inboxValue) {
+                // 写个小工具可以提取标签，然后发送到后台
+                dictionary.postNewTag(inboxWordsWithoutPound)
+
                 dictionary.postSentenceTODB(inboxValue).then(function (msg) {
                     let newSen = new sentence(inboxValue, Tools.getDateTime())
                     Content.addDESC(newSen);

@@ -40,12 +40,18 @@
     cursor: pointer;
 }
 
-.main-word:hover {
-    background-color: lightpink;
+.main-word:hover,
+.main-word-punc:hover {
+    background-color: greenyellow;
     cursor: pointer !important;
 }
 
-.tag {
+.main-punc:hover {
+    background-color: blue;
+}
+
+.main-word-tag,
+.main-word-tag-punc {
     display: inline-block;
     color: #5783f7;
     background-color: #eef3fe;
@@ -54,7 +60,9 @@
     transition: 0.3s;
 }
 
-.tag:hover {
+.main-word-tag:hover,
+.main-word-tag-punc:hover {
     background-color: #5783f7;
     color: white;
+    cursor: pointer;
 }
