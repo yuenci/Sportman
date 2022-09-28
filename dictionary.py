@@ -777,3 +777,21 @@ def getBatchSentence(sentenceList):
         return {"msg": "success"}
     else:
         return {"error": "can't insert sentences to DB"}
+
+
+def getStreakData():
+    sql = "SELECT distinct DATE(create_time) from logs ORDER BY DATE(create_time) desc;"
+    res = DB.query(sql)
+
+    i = 0
+    for ele in res:
+        date = datetime.date.today() - datetime.timedelta(days=i)
+        if(ele[0] == date):
+
+            i += 1
+        else:
+            break
+    return {"number": i}
+
+
+getStreakData()

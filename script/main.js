@@ -57,7 +57,8 @@ import { TP } from "./textProcess.js"
 
 // $("#test-btn").css("display", "inline-block")
 // $("#test-btn").click(function () {
-//     console.log($.mynamespace.myVar);
+//     console.log("hi");
+//     console.log(Tools.numberToEmojy(345));
 // });
 
 

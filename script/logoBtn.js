@@ -4,6 +4,8 @@ import { Menu } from "../script/menu"
 import { Html } from "../script/htmlContent"
 import { Rlayer } from "./rightlayer"
 import { LogoMAccount } from "./logoMenuAccount"
+import { Tools } from './toolShop'
+import { dictionary } from './dictionary'
 
 class LogoButton {
     constructor() {
@@ -35,6 +37,16 @@ class LogoButton {
                 layerIndex = null;
             }
         });
+
+        this.displayStreak();
+    }
+
+    displayStreak() {
+        dictionary.getStreak().then((data) => {
+            console.log(data);
+            let num = data.number
+            $("#logo-userName").before(`<span id='logo-streak'>${Tools.numberToEmojy(num)}</span>`)
+        })
     }
 
     static showAccountSetting() {
@@ -42,6 +54,8 @@ class LogoButton {
         $("#rlayer").append($(`${Html.logoMenuAccount()}`))
         new LogoMAccount();
     }
+
+
 }
 
 export { LogoButton };

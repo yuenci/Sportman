@@ -107,6 +107,16 @@ class Tools {
         let currentNum = parseInt($senNum.text())
         $senNum.text(currentNum + num)
     }
+
+    static numberToEmojy(num) {
+        let number = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
+        let numStr = num.toString()
+        let emojyStr = ""
+        for (let i = 0; i < numStr.length; i++) {
+            emojyStr += number[Number(numStr[i])]
+        }
+        return emojyStr
+    }
 }
 
 export { Tools };

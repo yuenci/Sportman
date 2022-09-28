@@ -127,6 +127,15 @@ def getStatus():
     print(dict)
     return dict
 
+# 获得例子连胜纪录
+
+
+@app.route('/examples/streak', methods=["GET"])
+def getStreak():
+    dict = dictionary.getStreakData()
+    print(dict)
+    return dict
+
 # 储存新的句子
 
 

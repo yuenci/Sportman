@@ -74,7 +74,7 @@ class Html {
 
     static searchBox = `
             <div id="searchBox">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
                 <input type="text" id="searchBox-input">
                 <i class="fa fa-sliders" aria-hidden="true" id="search-confg-icon"></i>
             </div>

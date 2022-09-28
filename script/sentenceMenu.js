@@ -1,4 +1,5 @@
 import { dictionary } from './dictionary'
+import { Tools } from './toolShop';
 
 class SentenceMenu {
     static editSentence($btnObj) {
@@ -40,11 +41,13 @@ class SentenceMenu {
         if (menuText == "Delete") {
             dictionary.deleteSentenceFromDB(id)
             $box.remove();
+            Tools.senNumChange(-1);
             layer.closeAll('page');
         } else {
             dictionary.restoreSentenceFromDB(id.substring(0, id.length - 2))
-            console.log("restore sentence");
+            //fa-searchconsole.log("restore sentence");
             $box.remove();
+            Tools.senNumChange(1);
             layer.closeAll('page');
         }
 

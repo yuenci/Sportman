@@ -80,7 +80,7 @@ class dictionary {
     }
 
     static async querySentenceFromDB(keyword) {
-        console.log("query tags from DB");
+        //console.log("query tags from DB");
         let data = await Http.getRequeste(
             "/sentences/query",
             { "type": "word", "word": keyword }
@@ -207,6 +207,14 @@ class dictionary {
         let data = await Http.postRequeste(
             "/sentences/batch",
             { "sentences": sentencesList }
+        )
+        return data
+    }
+
+    static async getStreak() {
+        let data = await Http.getRequeste(
+            "/examples/streak",
+            { "type": "streak" }
         )
         return data
     }
