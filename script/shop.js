@@ -40,10 +40,11 @@ class Shop {
 
     getLuckyClickEvent = function () {
         dictionary.getLucky().then((data) => {
-            let text = Object.keys(data)[0]
-            let datetime = data[text]
+            let text = data["sentence"]
+            let datetime = data["time"]
+            let id = data["id"]
 
-            Content.showLucky(text, datetime);
+            Content.showLucky(text, datetime, id);
         })
     }
 

@@ -67,8 +67,9 @@ class Inbox {
             if (inboxValue) {
                 dictionary.postNewTag(inboxTagsList)
 
-                dictionary.postSentenceTODB(inboxValue).then(function (msg) {
-                    let newSen = new sentence(inboxValue, Tools.getDateTime())
+                dictionary.postSentenceTODB(inboxValue).then(function (data) {
+                    console.log(data);
+                    let newSen = new sentence(inboxValue, Tools.getDateTime(), data.id);
                     Content.addDESC(newSen);
                     $("#inbox-ta").val("");
                     $("#enter-btn").css("background-color", "#cecece");

@@ -1,9 +1,9 @@
 import "../style/tagManager.css"
 import "../style/menuStyle.css"
-import { Brand } from "../script/brand"
-import { Menu } from "../script/menu"
+import { Brand } from "./brand"
+import { Menu } from "./menu"
 import { Content } from './contentObj'
-import { Html } from "../script/htmlContent"
+import { Html } from "./htmlContent"
 import { dictionary } from "./dictionary"
 
 class TagM {
@@ -39,12 +39,16 @@ class TagM {
             item.addEventListener("click", this.tagMenuClickEvent)
         })
 
-        //测试：添加item的事件
+
+        //给item注册事件
         document.querySelectorAll("#tagM-title").forEach(item => {
             item.addEventListener("click", () => this.addTagItem("tag", "new item"))
         })
 
-
+        //给回收站注册事件
+        $("#tag-trash").click(() => {
+            Content.addAllTrash()
+        })
     }
 
     tagClickEvent = function () {

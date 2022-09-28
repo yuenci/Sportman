@@ -10,16 +10,32 @@ class Content {
         $("#content").prepend($jqSentenceObj);
     }
 
-    static showLucky(text, datetime) {
+    static addObjsASC(objsData) {
+        let sentences = objsData["data"]
         $("#content").empty();
-        Content.addDESC(new sentence(text, datetime));
+        for (const ele of sentences) {
+            Content.addASC(new sentence(ele[0], ele[1], ele[2]));
+        }
+    }
+
+    static addObjsDESC(objsData) {
+        let sentences = objsData["data"]
+        $("#content").empty();
+        for (const ele of sentences) {
+            Content.addDESC(new sentence(ele[0], ele[1], ele[2]));
+        }
+    }
+
+    static showLucky(text, datetime, id) {
+        $("#content").empty();
+        Content.addDESC(new sentence(text, datetime, id));
     }
 
     static addAllASC() {
         dictionary.getAllSentences().then(function (data) {
             let sentences = data["data"]
             for (const ele of sentences) {
-                Content.addASC(new sentence(ele[0], ele[1]));
+                Content.addASC(new sentence(ele[0], ele[1], ele[2]));
             }
         })
     }
@@ -30,7 +46,7 @@ class Content {
                 dictionary.getAllSentences().then(function (data) {
                     let sentences = data["data"]
                     for (const ele of sentences) {
-                        Content.addDESC(new sentence(ele[0], ele[1]));
+                        Content.addDESC(new sentence(ele[0], ele[1], ele[2]));
                     }
                     setTimeout(() => resolve("sync successfully"), 500);
                 })
@@ -43,7 +59,7 @@ class Content {
             let sentences = data["data"]
             $("#content").empty();
             for (const ele of sentences) {
-                Content.addDESC(new sentence(ele[0], ele[1]));
+                Content.addDESC(new sentence(ele[0], ele[1], ele[2]));
             }
         })
     }
@@ -53,8 +69,14 @@ class Content {
             let sentences = data["data"]
             $("#content").empty();
             for (const ele of sentences) {
-                Content.addDESC(new sentence(ele[0], ele[1]));
+                Content.addDESC(new sentence(ele[0], ele[1], ele[2]));
             }
+        })
+    }
+
+    static addAllTrash(time) {
+        dictionary.getTrash().then(function (data) {
+            Content.addObjsASC(data)
         })
     }
 }

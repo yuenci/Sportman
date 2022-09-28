@@ -6,6 +6,7 @@
      margin: 0px;
      box-sizing: border-box;
      padding: 0;
+     user-select: none;
  }
 
  .menu-ul li {
@@ -41,4 +42,13 @@
 
  #word-count {
      margin-left: 3px;
+ }
+
+ #word-count-li {
+     color: var(--wcolor-gray-primary);
+ }
+
+ #word-count-li:hover {
+     cursor: default;
+     color: black;
  }

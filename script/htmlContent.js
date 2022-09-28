@@ -169,9 +169,9 @@ class Html {
     // `;
     // }
 
-    static sentence(sen, time) {
+    static sentence(sen, time, id) {
         let data = TP.tokenize(sen)
-        let words = data.words
+        let sentence = data.words
         let wordNum = data.wordNum
 
         return `<div class="box">
@@ -181,7 +181,7 @@ class Html {
                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
             </div>
         </div>
-        <div class="sentence-content" >${words}</div>
+        <div class="sentence-content"  data-id="${id}">${sentence}</div>
         </div>
     `;
     }

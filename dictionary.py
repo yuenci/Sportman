@@ -12,6 +12,7 @@ from collections import Counter
 import DB
 import os
 import config
+import datetime
 
 
 '''获取一个sql 连接
@@ -428,13 +429,13 @@ def insertSentence(sen):
 def getAllSentence():
     conn = getConn()
     cursor = conn.cursor()
-    sql = "SELECT sentence,create_time FROM inbox_sentences ORDER BY create_time ASC;"
+    sql = "SELECT sentence,create_time,id FROM inbox_sentences WHERE status<>-1 ORDER BY create_time ASC;"
     try:
         cursor.execute(sql)
         data = cursor.fetchall()
         newData = []
         for ele in data:
-            newData.append([decodeText(ele[0]), str(ele[1])])
+            newData.append([decodeText(ele[0]), str(ele[1]), ele[2]])
         # data = [list(ele) for ele in data]
         return {"data": newData}
     except pymysql.Error as e:
@@ -450,12 +451,17 @@ def postSentencesToDB(sentence):
     conn = getConn()
     cursor = conn.cursor()
     sentence = encodeText(sentence)
-    sql = f"INSERT INTO inbox_sentences (sentence) VALUES ('{sentence}');"
+    sql1 = f"INSERT INTO inbox_sentences (sentence) VALUES ('{sentence}');"
+    sql2 = "select max(id) from inbox_sentences;"
 
     try:
-        cursor.execute(sql)
+        cursor.execute(sql1)
         conn.commit()
-        return {"msg": "success"}
+
+        cursor.execute(sql2)
+        data = cursor.fetchall()
+        return {"msg": "success",
+                "id": data[0][0]}
     except pymysql.Error as e:
         conn.rollback()
         print(e.args[0], e.args[1])
@@ -472,8 +478,8 @@ def querySentencesFromDB(type, word):
     conn = getConn()
     cursor = conn.cursor()
     sql = ""
-    sqlWord = f"SELECT sentence, create_time FROM inbox_sentences WHERE sentence like '%{word}%' ORDER BY create_time ASC"
-    sqlTime = f"SELECT sentence, create_time  FROM inbox_sentences WHERE DATE(create_time) = '{word[:10]}'  ORDER BY create_time ASC; "
+    sqlWord = f"SELECT sentence, create_time,id FROM inbox_sentences WHERE status<>-1 AND sentence like '%{word}%' ORDER BY create_time ASC"
+    sqlTime = f"SELECT sentence, create_time,id  FROM inbox_sentences WHERE status<>-1 AND DATE(create_time) = '{word[:10]}'  ORDER BY create_time ASC; "
     if(type == "word"):
         sql = sqlWord
     elif(type == "time"):
@@ -484,7 +490,7 @@ def querySentencesFromDB(type, word):
         data = cursor.fetchall()
         newData = []
         for ele in data:
-            newData.append([ele[0], str(ele[1])])
+            newData.append([ele[0], str(ele[1]), ele[2]])
         return {"data": newData}
     except pymysql.Error as e:
         conn.rollback()
@@ -495,13 +501,50 @@ def querySentencesFromDB(type, word):
         conn.close()
 
 
+def deleteSentence(sentenceID):
+    sql = f"UPDATE inbox_sentences SET status = -1, delete_time = '{ datetime.datetime.now()}'\
+        WHERE id = {sentenceID};"
+
+    res = DB.excute(sql)
+    if(res):
+        return {"msg": "success"}
+    else:
+        return {"error": "can't delete sentence"}
+
+
 def getlucky():
-    sql = "SELECT sentence, create_time FROM inbox_sentences as t1 WHERE t1.id >= (RAND()*(SELECT MAX(id) FROM inbox_sentences)) LIMIT 1;"
+    sql = "SELECT sentence, create_time,id FROM inbox_sentences as t1 WHERE status<>-1 AND t1.id >= (RAND()*(SELECT MAX(id) FROM inbox_sentences)) LIMIT 1;"
     data = DB.query(sql)
     if(data):
-        return {data[0][0]: str(data[0][1])}
+        return {
+            "sentence": data[0][0],
+            "time": str(data[0][1]),
+            "id": data[0][2]
+        }
     else:
         return {"error": "can't get lucky sentence"}
+
+
+def getTrash():
+    sql = "SELECT sentence, delete_time ,id FROM inbox_sentences WHERE status=-1 ORDER BY create_time ASC;"
+    data = DB.query(sql)
+    data = [list(ele) for ele in data]
+    for ele in data:
+        ele[1] = str(ele[1])
+        ele[2] = str(ele[2]) + "-1"
+    if(data):
+        return {"data": data}
+    else:
+        return {"error": "can't get trash sentences"}
+
+
+def restoreSen(sentenceID):
+    sql = f"UPDATE inbox_sentences SET status = 0 WHERE id = {sentenceID};"
+    res = DB.excute(sql)
+    if(res):
+        return {"msg": "success"}
+    else:
+        return {"error": "can't restore sentences"}
 
 
 def logForLogin(jsonData):

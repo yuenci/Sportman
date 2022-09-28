@@ -35,6 +35,20 @@ def getLucky():
     dict = dictionary.getlucky()
     return dict
 
+
+@app.route('/sentences/trash', methods=["GET"])
+def trashSen():
+    dict = dictionary.getTrash()
+    return dict
+
+
+@app.route('/sentences/trash', methods=["PATCH"])
+def restoreSen():
+    jsonData = request.json
+    sentenceID = jsonData["sentenceID"]
+    dict = dictionary.restoreSen(sentenceID)
+    return dict
+
 # 获取解释
 
 
@@ -121,6 +135,16 @@ def postSens():
     jsonData = request.json
     sentence = jsonData["sentence"]
     dict = dictionary.postSentencesToDB(sentence)
+    return dict
+
+# 删除句子
+
+
+@app.route('/sentences', methods=["DELETE"])
+def deleteSentence():
+    jsonData = request.json
+    sentenceID = jsonData["sentenceID"]
+    dict = dictionary.deleteSentence(sentenceID)
     return dict
 
 # 储存登录信息

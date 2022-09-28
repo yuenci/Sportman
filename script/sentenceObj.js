@@ -7,11 +7,12 @@ import { Brand } from "../script/brand"
 import { Html } from "../script/htmlContent"
 
 class sentence {
-    constructor(sen, time) {
+    constructor(sen, time, id) {
         this.sen = sen;
         this.time = time
+        this.id = id;
         this.$senObj = 123;
-        this.sentenceContent = Html.sentence(sen, time)
+        this.sentenceContent = Html.sentence(sen, time, id)
 
         return this.init();
     }
@@ -114,7 +115,7 @@ class sentence {
 
     meunBtnClickEvent() {
         layer.open(Menu.sentenceMenu($(this)));
-        Menu.senMenuClickEvent();
+        Menu.senMenuClickEvent($(this));
     }
 
     deleteSen() {

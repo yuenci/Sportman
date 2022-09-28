@@ -3,6 +3,7 @@ import { TagM } from "./tagManager.js";
 import { LogoButton } from "./logoBtn.js";
 import { EmojyPicker } from "./emojyPicker.js";
 import { sentence } from "./sentenceObj.js";
+import { SentenceMenu } from "./sentenceMenu.js";
 
 class Menu {
     // tools
@@ -89,6 +90,10 @@ class Menu {
 
 
     static sentenceMenu($btnObj) {
+        //let pin = $btnObj.parent().attr("type") == "sentence" ? "Pin" : "Unpin";
+        let id = $btnObj.parent().next().attr("data-id")
+        let menuText = id.indexOf("-1") !== -1 ? "Restore " : "Delete";
+
         let config = {
             //https://layuion.com/docs/modules/layer.html
             type: 1,
@@ -102,14 +107,17 @@ class Menu {
             offset: [`${$btnObj.offset().top + 30}px `, `${$btnObj.offset().left - 85}px`],
             content: `
                     <ul class="menu-ul">
-                        <li>Edit</li>
-                        <li>Pin</li>
+                        <li id="sen-menu-edit">Edit</li>
+                        <li id="sen-menu-pin">Pin</li>
                         <hr/>
-                        <li>View details</li>
-                        <li>Annotate</li>
-                        <li id="sen-menu-delete">Delete</li>
+                        <li id="sen-menu-detail">View details</li>
+                        <li id="sen-menu-metadata">View Metadata</li>
+                        <li id="sen-menu-annotate">Annotate</li>
+                        <li id="sen-menu-delete">${menuText}</li>
                         <hr/>
-                        <li>Word count:<span id="word-count">66</span></li>
+                        <li id="word-count-li">Word count:
+                            <span id="word-count">${$btnObj.attr("data-wordnum")}</span>
+                        </li>
                     </ul>
                     `,
             fixed: false, //是否固定位置
@@ -118,17 +126,27 @@ class Menu {
         return config;
     }
 
-    static senMenuClickEvent() {
-        // this.clickEventRegister("#logo-menu-account",
-        //     () => console.log("hi from logo-menu-account")
-        // );
-        // this.clickEventRegister("#tag-menu-set-icon",
-        //     () => console.log("hi from tag-menu-set-icon")
-        // );
+    static senMenuClickEvent($btnObj) {
+        this.clickEventRegister("#sen-menu-edit",
+            () => SentenceMenu.editSentence($btnObj)
+        );
+        this.clickEventRegister("#sen-menu-pin",
+            () => SentenceMenu.pinSentence($btnObj)
+        );
+        this.clickEventRegister("#sen-menu-detail",
+            () => SentenceMenu.viewDetails($btnObj)
+        );
+        this.clickEventRegister("#sen-menu-metadata",
+            () => SentenceMenu.viewMetadata($btnObj)
+        );
+        this.clickEventRegister("#sen-menu-annotate",
+            () => SentenceMenu.annotateSentence($btnObj)
+        );
         this.clickEventRegister("#sen-menu-delete",
-            console.log(this)
+            () => SentenceMenu.deleteSentence($btnObj)
         );
     }
+
 
     static searchMenu($btnObj) {
         let config = {
