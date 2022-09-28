@@ -139,6 +139,7 @@ class dictionary {
     }
 
     static async postNewTag(tagName) {
+        //console.log("post new tag");
         let data = await Http.postRequeste(
             "/tags",
             { "tag": tagName }
@@ -198,6 +199,14 @@ class dictionary {
         let data = await Http.postRequeste(
             "/chat",
             { "messages": messagesList }
+        )
+        return data
+    }
+
+    static async addBatchSentences(sentencesList) {
+        let data = await Http.postRequeste(
+            "/sentences/batch",
+            { "sentences": sentencesList }
         )
         return data
     }

@@ -15,6 +15,12 @@ class Inbox {
 
     create() {
         $("#inbox-in").append($(`${this.content}`))
+        this.inboxTextAreaEvent();
+        this.enterBtnPressEvent();
+        this.addBatchEvent();
+    }
+
+    inboxTextAreaEvent() {
         $("#inbox-ta")
             .focus(function () {
                 $("#inbox").css("box-shadow", "0 2px 16px lightblue");
@@ -22,7 +28,6 @@ class Inbox {
             .blur(function () {
                 $("#inbox").css("box-shadow", "none");
             });
-
 
         $("#inbox-ta").on('input propertychange', function () {
             if ($(this).val()) {
@@ -49,6 +54,15 @@ class Inbox {
             }
         });
 
+        $("#inbox-ta").keydown(function (e) {
+            if (e.ctrlKey && e.which == 13) {
+                // console.log("ctrl + enter");
+                $("#enter-btn").click();
+            }
+        });
+    }
+
+    enterBtnPressEvent() {
         $("#enter-btn").click(function () {
             let inboxValue = $("#inbox-ta").val()
             let inboxWords = inboxValue.split(" ")
@@ -77,18 +91,23 @@ class Inbox {
                 })
             }
         });
-
-        $("#inbox-ta").keydown(function (e) {
-            if (e.ctrlKey && e.which == 13) {
-                // console.log("ctrl + enter");
-                $("#enter-btn").click();
-            }
-        });
     }
 
-
-
-
+    addBatchEvent() {
+        $("#inbox-add-batch").click(function () {
+            let index = layer.open({
+                type: 2,
+                anim: 5,
+                title: false,
+                shadeClose: false,
+                shade: 0.8,
+                area: ["100%", "100%"],
+                shade: [0.95, '#000'],
+                closeBtn: 0,
+                content: `../html/addBatch.html`,
+            });
+        })
+    }
 }
 
 export { Inbox };

@@ -147,6 +147,16 @@ def deleteSentence():
     dict = dictionary.deleteSentence(sentenceID)
     return dict
 
+# 导入一批句子
+
+
+@app.route('/sentences/batch', methods=["POST"])
+def postBatchSens():
+    jsonData = request.json
+    sentencesList = jsonData["sentences"]
+    dict = dictionary.getBatchSentence(sentencesList)
+    return dict
+
 # 储存登录信息
 
 

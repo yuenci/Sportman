@@ -76,7 +76,7 @@ class Content {
 
     static addAllTrash(time) {
         dictionary.getTrash().then(function (data) {
-            Content.addObjsASC(data)
+            Content.addObjsDESC(data)
         })
     }
 }

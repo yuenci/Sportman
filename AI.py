@@ -21,7 +21,7 @@ def chat(messageList):
         else:
             message += start_sequence + ele
         i += 1
-    print("💌：" + message)
+    #print("💌：" + message)
 
     response = openai.Completion.create(
         # model="text-curie-001",

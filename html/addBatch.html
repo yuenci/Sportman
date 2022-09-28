@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/addBatch.css">
+    <title>AddPatch</title>
+</head>
+
+<body>
+    <!-- <h1>Hello,world</h1>
+    <button id="add-close">Close</button> -->
+    <div id="add-import-container">
+        <div id="cancel-btn">CANCEL IMPORT</div>
+        <div id="import-tip">Import your data Copy and Paste your data here (from Word, Excel, Google Docs, etc.)</div>
+        <textarea name="" id="import-ta"></textarea>
+        <div id="add-import-lower">
+            <div id="add-import-lower-left">
+                <div id="add-between">Between cards</div>
+                <div id="method-container">
+                    <div>
+                        <input type="radio" id="newline" name="method" value="newline" checked>
+                        <label for="newline">New Line</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="semicolon" name="method" value="semicolon">
+                        <label for="semicolon">Semicolon</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" id="custom" name="method" value="custom">
+                        <input type="text" id="customPunc-input" value="">
+                    </div>
+                </div>
+            </div>
+            <div id="add-import-lower-right">
+                <button id="import-btn">Import</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="add-preview-container1">
+        <div id="add-preview-container">
+            <div id="preview">Preview</div>
+            <div id="preview-tip">Nothing to preview yet</div>
+            <div id="cards-container"></div>
+        </div>
+    </div>
+
+    <script src="../script/jquery.min.js"></script>
+    <script type="module" src="../script/addBatch.js"></script>
+    <script src="../script/layer.js"></script>
+</body>
+
+</html>

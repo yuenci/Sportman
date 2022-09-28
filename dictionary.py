@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from faker import Faker
 import pickle
 import pymysql
@@ -375,7 +376,7 @@ def updateDuration(jsondata):
     conn = getConn()
     cursor = conn.cursor()
     sql = f"UPDATE examples_data SET {type1} ={type1}+ {duration} WHERE id =  '{id}';"
-    print(sql)
+    # print(sql)
     try:
         cursor.execute(sql)
         conn.commit()
@@ -760,3 +761,19 @@ def putCachePositionToFile(position):
 def postChatMessage(messageList):
     res = AI.chat(messageList)
     return res
+
+
+def getBatchSentence(sentenceList):
+    valueList = []
+    for sen in sentenceList:
+        valueList.append([sen])
+
+    res = DB.insert(
+        tableName="inbox_sentences",
+        colNames=["sentence"],
+        values=valueList
+    )
+    if(res):
+        return {"msg": "success"}
+    else:
+        return {"error": "can't insert sentences to DB"}

@@ -62,6 +62,7 @@ class Html {
         <textarea name="" id="inbox-ta"></textarea>
         <div id="inbox-toolbar">
             <div id="inbox-tools-container">
+                <div id="inbox-add-batch"><i class="fa fa-plus" aria-hidden="true"></i></div>
                 <button class="inbox-tools">👆</button>
                 <button class="inbox-tools">👆</button>
             </div>
