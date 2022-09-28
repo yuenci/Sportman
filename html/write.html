@@ -12,7 +12,7 @@
 
 <body>
     <div id="writing-app" class="app">
-        <div id="writing-word" class="word-title"></div>
+        <!-- <div id="writing-word" class="word-title"></div>
         <form>
             <div class="field">
                 <input id="name" type="text" placeholder="Name">
@@ -25,6 +25,13 @@
             <textarea id='msg' placeholder="Message"></textarea>
             <button data-error="Oops!, Something is wrong" data-success='Success, message sent'
                 id="submitBtn">Send</button>
+        </form> -->
+        <div class="chat">
+            <!-- Messages will appear here -->
+        </div>
+        <form id="messageForm">
+            <input type="text" id="messageBox" placeholder="Type your message here" />
+            <button id="send" title="Send">➤</button>
         </form>
     </div>
     <script type="module" src="../script/toolBar.js"></script>

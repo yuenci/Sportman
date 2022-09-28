@@ -44,6 +44,7 @@ class TP {
     static tokenize(sentence) {
         let words = sentence.split(" ");
         let res = [];
+        let wordNum = 0;
         const regexWord = /^((?!\p{P}|\d).)*[a-zA-Z]+((?!\p{P}|\d).)*$/u; //只包含字母，不包含标点和数字
         const regexWordAndPunc = /^((?!\p{P}|\d).)*[a-zA-Z]+((?!\p{P}|\d).)*\p{P}$/u; //只包含字母和末尾符号
         const regexPuncAndWord = /^\p{P}((?!\p{P}|\d).)*[a-zA-Z]+((?!\p{P}|\d).)*$/u; //只包含字母和末尾符号
@@ -57,12 +58,14 @@ class TP {
                 // 仅单词
                 //console.log(`[🔵:${word}]`);
                 res.push(`<span class="main-word">${word}</span>`);
+                wordNum += 1;
             }
             else if (regexWordAndPunc.test(word)) {
                 //单词末尾
                 //console.log(`[🔵🔘:${word}]`);
                 res.push(`<span class="main-word-punc">${word.replace(regexPunc, `<span class="main-punc">$&</span>`)}</span>`);
                 regexPunc.lastIndex = 0;
+                wordNum += 1;
             }
             else if (regexTag.test(word)) {
                 // 仅标签
@@ -79,6 +82,7 @@ class TP {
                 res.push(`<span class="main-word-punc">${word.replace(regexPunc, `<span class="main-punc">$&</span>`)}</span>`);
                 //console.log("punc start");
                 regexPunc.lastIndex = 0;
+                wordNum += 1;
             }
             else {
                 //console.log(`[❌:${word}]`);
@@ -86,7 +90,10 @@ class TP {
             }
         }
 
-        return res.join(" ");
+        return {
+            "words": res.join(" "),
+            "wordNum": wordNum
+        };
     }
 
     static tagCheck(tag) {
@@ -99,11 +106,11 @@ class TP {
             return null;
         } else if (regexTag.test(tag1)) {
             // 仅标签
-            console.log(`${tag1}: ${regexTag.test(tag1)}-tag`);
+            //console.log(`${tag1}: ${regexTag.test(tag1)}-tag`);
             return tag1.substring(0, tag1.length);
         } else if (regexTagAndPunc.test(tag1)) {
             // 标签和标点
-            console.log(`${tag1}: ${regexTagAndPunc.test(tag1)}-tagPunc`);
+            //console.log(`${tag1}: ${regexTagAndPunc.test(tag1)}-tagPunc`);
             return tag1.substring(0, tag1.length - 1);
         } else {
             // 其他

@@ -5,6 +5,7 @@ import { sentence } from './sentenceObj'
 import { Content } from './contentObj'
 import { Html } from "./htmlContent"
 import { TP } from './textProcess'
+import { TagM } from './tagManager'
 
 class Inbox {
     constructor() {
@@ -51,23 +52,27 @@ class Inbox {
         $("#enter-btn").click(function () {
             let inboxValue = $("#inbox-ta").val()
             let inboxWords = inboxValue.split(" ")
-            let inboxWordsWithoutPound = []
+            let inboxTagsList = []
+
+            let TagMInstance = new TagM();
             for (const word of inboxWords) {
-                let wordWithoutPound = TP.tagCheck(word)
-                if (wordWithoutPound) {
-                    inboxWordsWithoutPound.push(wordWithoutPound)
+                let inboxTags = TP.tagCheck(word)
+                if (inboxTags) {
+                    inboxTagsList.push(inboxTags);
+                    TagMInstance.addTagItem("tag", inboxTags);
                 }
+
             }
 
             if (inboxValue) {
-                // 写个小工具可以提取标签，然后发送到后台
-                dictionary.postNewTag(inboxWordsWithoutPound)
+                dictionary.postNewTag(inboxTagsList)
 
                 dictionary.postSentenceTODB(inboxValue).then(function (msg) {
                     let newSen = new sentence(inboxValue, Tools.getDateTime())
                     Content.addDESC(newSen);
                     $("#inbox-ta").val("");
                     $("#enter-btn").css("background-color", "#cecece");
+                    Tools.senNumChange(1);
                 })
             }
         });

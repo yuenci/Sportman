@@ -145,9 +145,11 @@ class TagM {
             let thisTagtext = $this.find(".tag-item-text").text()
             if (tagText === thisTagtext) {
                 if ($this.attr("type") == "tag") {
+                    //console.log("pin");
                     TagM.pinTagItem();
                     dictionary.updateTagPinStatus(tagText, "1")
                 } else {
+                    //console.log("un pin");
                     TagM.unPinTagItem();
                     dictionary.updateTagPinStatus(tagText, "0")
                 }
@@ -166,11 +168,6 @@ class TagM {
         new TagM().addTagItem("tag", text)
     }
 
-    static addTagToDB(tagText) {
-        dictionary.postNewTag(tagText).then(data => {
-            //console.log(data)
-        })
-    }
 }
 
 

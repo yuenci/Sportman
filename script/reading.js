@@ -2,19 +2,25 @@ import { dictionary } from "./dictionary"
 import '../style/read.css'
 import { Timer } from '../script/timer'
 import { Tools } from "./toolShop";
-window.lala = "lalal"
+
 window.readTimer = new Timer();
 $(document).ready(function () {
     showNewExample();
+
     var myBoard = new DrawingBoard.Board('painter');
 
     readTimer.start();
 })
 
-// $(window).unload(function () {
-//     readTimer.end();
-// });
+function loadAudio() {
+    $("#reading-audio").attr("src", Tools.getAudioUrl(localStorage.getItem("currentExample")))
 
+    console.log(Tools.getAudioUrl(localStorage.getItem("currentExample")));
+
+    document.querySelector("#reading-speaker").addEventListener("click", function () {
+        document.querySelector("#reading-audio").play();
+    })
+}
 
 async function showNewExample() {
     let word = localStorage.getItem("currentWord")
@@ -29,6 +35,8 @@ async function showNewExample() {
     let sen = examplesData["example"];
 
     localStorage.setItem("currentExample", sen)
+
+    loadAudio();
 
     $("#reading-sentence").text(Tools.getUpperSen(sen))
     layer.close(index);

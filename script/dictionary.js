@@ -204,8 +204,6 @@ class dictionary {
             "/tags",
             { "tag": tagName }
         )
-        console.log("tag Post Data 👇");
-        console.log(data);
         return data
     }
 

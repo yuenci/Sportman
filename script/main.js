@@ -4,6 +4,7 @@ import { Content } from './contentObj'
 import { Log } from './logging'
 import { Html } from './htmlContent'
 import { LogoMAccount } from './logoMenuAccount'
+import { Tools } from './toolShop'
 
 // login log
 Log.loginLog();
@@ -38,17 +39,20 @@ new Brand();
 
 //shop
 import { Shop } from "./shop.js";
+import { EmojyPicker } from "./emojyPicker.js";
 new Shop();
 
 //Rlayer
 import { Rlayer } from "./rightlayer.js";
 import { Http } from "./http.js"
+import { TP } from "./textProcess.js"
 // new Rlayer().show();
 // $("#rlayer").append($(`${Html.logoMenuAccount()}`))
 // new LogoMAccount();
 
+// $("#test-btn").css("display", "inline-block")
 // $("#test-btn").click(function () {
-    
+//     Tools.senNumChange(1)
 // });
 
 

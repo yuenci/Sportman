@@ -25,9 +25,10 @@ async function getExamplesFromDB() {
     let keys = Object.keys(examplesData);
     for (const key of keys) {
         if (examplesData[key]["display"]) {
+            const exampleContent = examplesData[key]["content"].replaceAll("--", "'");
             $("#examples-app").append($(`<div class='input-item'>
                                             <input type="checkbox" id="${key}" class="examplesSen magic-checkbox">
-                                            <label for="${key}">${examplesData[key]["content"]}</label>
+                                            <label for="${key}">${exampleContent}</label>
                                         </div>`));
         }
     }

@@ -170,12 +170,18 @@ class Html {
     // }
 
     static sentence(sen, time) {
+        let data = TP.tokenize(sen)
+        let words = data.words
+        let wordNum = data.wordNum
+
         return `<div class="box">
         <div class="sentence-upper">
             <div class="sentence-upper-time">${time}</div>
-            <div class="sentence-upper-menu-btn"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+            <div class="sentence-upper-menu-btn"  data-wordNum='${wordNum}'>
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </div>
         </div>
-        <div class="sentence-content">${TP.tokenize(sen)}</div>
+        <div class="sentence-content" >${words}</div>
         </div>
     `;
     }
@@ -269,6 +275,21 @@ class Html {
             <button id="dc-item-cancel">Cancel my aacount and delete all data</button>
         </div>
         `;
+    }
+
+    static toolBar(pageType) {
+        return `
+        <div class="toolbar">
+            <div class="toolbar-page-type">${pageType}</div>
+            <div class="toolbar-process">
+                <div class="toolbar-process-item"></div>
+                <div class="toolbar-process-item"></div>
+                <div class="toolbar-process-item"></div>
+                <div class="toolbar-process-item"></div>
+            </div>
+            <button class="next-page">Next</button>
+        <div>"
+        `
     }
 }
 

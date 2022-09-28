@@ -1,6 +1,8 @@
 import "../style/menuStyle.css"
 import { TagM } from "./tagManager.js";
 import { LogoButton } from "./logoBtn.js";
+import { EmojyPicker } from "./emojyPicker.js";
+import { sentence } from "./sentenceObj.js";
 
 class Menu {
     // tools
@@ -41,7 +43,7 @@ class Menu {
             () => TagM.switchPinUnpain()
         );
         this.clickEventRegister("#tag-menu-set-icon",
-            () => console.log("hi from tag-menu-set-icon")
+            () => console.log("icon")
         );
         this.clickEventRegister("#tag-menu-del",
             () => TagM.deleteTagItem()
@@ -75,7 +77,7 @@ class Menu {
 
     static logoMenuClickEvent() {
         this.clickEventRegister("#logo-menu-account",
-            () =>LogoButton.showAccountSetting()
+            () => LogoButton.showAccountSetting()
         );
         // this.clickEventRegister("#tag-menu-set-icon",
         //     () => console.log("hi from tag-menu-set-icon")
@@ -100,15 +102,32 @@ class Menu {
             offset: [`${$btnObj.offset().top + 30}px `, `${$btnObj.offset().left - 85}px`],
             content: `
                     <ul class="menu-ul">
-                        <li>111111111111</li>
-                        <li>222222222222</li>
-                        <li>333333333333</li>
+                        <li>Edit</li>
+                        <li>Pin</li>
+                        <hr/>
+                        <li>View details</li>
+                        <li>Annotate</li>
+                        <li id="sen-menu-delete">Delete</li>
+                        <hr/>
+                        <li>Word count:<span id="word-count">66</span></li>
                     </ul>
                     `,
             fixed: false, //是否固定位置
         }
 
         return config;
+    }
+
+    static senMenuClickEvent() {
+        // this.clickEventRegister("#logo-menu-account",
+        //     () => console.log("hi from logo-menu-account")
+        // );
+        // this.clickEventRegister("#tag-menu-set-icon",
+        //     () => console.log("hi from tag-menu-set-icon")
+        // );
+        this.clickEventRegister("#sen-menu-delete",
+            console.log(this)
+        );
     }
 
     static searchMenu($btnObj) {

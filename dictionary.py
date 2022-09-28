@@ -180,7 +180,7 @@ def queryData(word):
         print("exist")
         return getExistExamplesFromDB(word)
     else:
-        print("new one")
+        # print("new one")
         try:
             html = getHtmlDataFromMDX(word)
             if(ifWordExistInMDX):
@@ -388,7 +388,7 @@ def updateDuration(jsondata):
 def wordStudyStatus(word):
     conn = getConn()
     cursor = conn.cursor()
-    sql = f"SELECT examples FROM word_examples WHERE word = '{word}';"
+    sql = f"SELECT * FROM examples_data WHERE word = '{word}';;"
     try:
         cursor.execute(sql)
         data = cursor.fetchall()
@@ -575,24 +575,24 @@ def logForLogin(jsonData):
 # endregion
 
 def getHeatMapData():
-    sql = "SELECT listening + speaking + reading +writing,unix_timestamp(create_time)" +\
+    sql = "SELECT listening + speaking + reading +writing,unix_timestamp(DATE(create_time))" +\
         "FROM examples_data WHERE to_days(now()) - to_days(create_time) <= 90; "
-    conn = getConn()
-    cursor = conn.cursor()
+
+    sql1 = "SELECT DISTINCT unix_timestamp(Date(create_time)) FROM Logs"
+
+    learingData = DB.query(sql)
+    loginData = DB.query(sql1)
+
     try:
-        cursor.execute(sql)
-        data = cursor.fetchall()
         newData = {}
-        for ele in data:
+        for ele in learingData:
             newData[ele[1]] = ele[0]
+        for ele in loginData:
+            if(ele not in newData):
+                newData[ele[0]] = 0
         return newData
-    except pymysql.Error as e:
-        conn.rollback()
-        print(e.args[0], e.args[1])
+    except:
         return {"error": "can't query HeatMap Data from DB"}
-    finally:
-        cursor.close()
-        conn.close()
 
 
 def getLearningData():
@@ -649,6 +649,7 @@ def getTag():
 
 
 def postTag(tagList):
+    res = None
     for tag in tagList:
         res = DB.insert(
             tableName="tags",
@@ -677,7 +678,7 @@ def updateTag(jsonData):
     pined = jsonData["status"]
     res = DB.update(
         tableName="tags",
-        dictData={"pined": "1"},
+        dictData={"pined": pined},
         WhereCon=f"tag = '{tag}'"
     )
     if(res):

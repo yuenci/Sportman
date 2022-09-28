@@ -102,6 +102,11 @@ class Tools {
         return url
     }
 
+    static senNumChange(num) {
+        let $senNum = $("#sens-num");
+        let currentNum = parseInt($senNum.text())
+        $senNum.text(currentNum + num)
+    }
 }
 
 export { Tools };

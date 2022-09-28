@@ -12,7 +12,7 @@ export class PracticeLayer {
     }
 
     static show() {
-        layer.open({
+        let index = layer.open({
             type: 2,
             anim: 5,
             title: Tools.getUpperWordFromLocal(),
@@ -105,8 +105,12 @@ export class PracticeLayer {
                     }
 
                 });
+            },
+            cancel: function () {
+                console.log("layer close");
             }
         });
+
     }
 
 
