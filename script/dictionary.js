@@ -55,8 +55,7 @@ class dictionary {
         let data = await Http.patchRequeste(
             "/examples/duration",
             {
-                "word": localStorage.getItem("currentWord"),
-                "example": localStorage.getItem("currentExample"),
+                "id": localStorage.getItem("currentExampleID"),
                 "type": Tools.typeConversion(localStorage.getItem("currentPage")),
                 "duration": duration
             }
@@ -191,6 +190,14 @@ class dictionary {
         let data = await Http.getRequeste(
             "/sentences/trash",
             { "type": "trash" }
+        )
+        return data
+    }
+
+    static async postChatMessages(messagesList) {
+        let data = await Http.postRequeste(
+            "/chat",
+            { "messages": messagesList }
         )
         return data
     }

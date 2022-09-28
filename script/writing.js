@@ -1,10 +1,12 @@
 import '../style/writing.css'
 
 import { Timer } from '../script/timer'
+import { dictionary } from "../script/dictionary";
 
 window.writeTimer = new Timer();
 $(document).ready(function () {
     writeTimer.start();
+    showMessageReceived("Hello! How are you today?");
 })
 
 $(window).unload(function () {
@@ -68,103 +70,19 @@ messageForm.onsubmit = function (e) {
     showMessageSent(message);
     messageBox.value = '';
 
-    sendMessageToServer(message);
-}
+    let messages = [];
+    document.querySelectorAll('.message').forEach((message) => {
+        messages.push(message.innerHTML);
+    });
 
-////////////////////////////////////////////////
-////////////// WS CLIENT LOGIC /////////////////
-////////////////////////////////////////////////
-
-function init() {
-
-    /* Note: 
-    Though the conditional block below is not necessary, it is a best practice to avoid
-    tampering with a cluttered namespace.
-    */
-
-    // If a WebSocket connection exists already, close it
-    if (wsClient) {
-        wsClient.onerror = wsClient.onopen = wsClient.onclose = null;
-        wsClient.close();
-    }
-
-
-    // TODO: 
-    // Exercise 4: Create a new WebSocket connection with the server using the ws protocol.
-    const URL = 'ws://localhost:' + PORT;
-    wsClient = new WebSocket(URL)
-
-    // TODO:
-    // Exercise 5: Respond to connections by defining the .onopen event handler.
-    wsClient.onopen = (event) => {
-        console.log('WebSocket connection established!');
-        const data = {
-            type: 'newUser'
-        }
-        wsClient.send(JSON.stringify(data))
-    }
-
-    // TODO:
-    // Exercise 7: Respond to messages from the servery by defining the .onmessage event handler
-    // Exercise 9: Parse custom message types, formatting each message based on the type.
-    wsClient.onmessage = (messageEvent) => {
-        const message = messageEvent.data;
-        const { type, payload } = JSON.parse(message);
-        switch (type) {
-            case 'newUser':
-                showMessageReceived('<em>New user has joined<em>');
-                break;
-            case 'newMessage':
-                showMessageReceived(payload.message);
-                break
-            default:
-                break;
-        }
-    };
-
-
-    /* Note:
-    The event handlers below are useful for properly cleaning up a closed/broken WebSocket client connection.
-    To read more about them, check out the WebSocket API documentation: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-    */
-
-    // .onclose is executed when the socket connection is closed
-    wsClient.onclose = (event) => {
-        showMessageReceived('No WebSocket connection :(');
-        wsClient = null;
-    }
-
-    // .onerror is executed when error event occurs on the WebSocket connection
-    wsClient.onerror = (event) => {
-        console.error("WebSocket error observed:", event);
-        wsClient = null;
-    }
-}
-
-function sendMessageToServer(message) {
-    // Make sure the client is connected to the ws server
-    if (!wsClient) {
-        showMessageReceived('No WebSocket connection :(');
-        return;
-    }
-
-    // TODO: 
-    // Exercise 6: Send the message from the messageBox to the server
-    // Exercise 9: Send the message in a custom message object with .type and .payload properties
-    const data = {
-        type: 'newMessage',
-        payload: {
-            message: message
-        }
-    }
-    wsClient.send(JSON.stringify(data));
-
+    sendMessageToServer(messages);
 
 }
 
-////////////////////////////////////////////////
-//////////// DOM HELPER FUNCTIONS //////////////
-////////////////////////////////////////////////
+async function sendMessageToServer(messagesList) {
+    let data = await dictionary.postChatMessages(messagesList);
+    showMessageReceived(data["response"])
+}
 
 const messages = document.querySelector('.chat');
 
@@ -194,5 +112,3 @@ function showNewMessage(message, className) {
     messages.scrollTop = messages.scrollHeight;
 }
 
-// Start the WebSocket server
-init();

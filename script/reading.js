@@ -4,6 +4,8 @@ import { Timer } from '../script/timer'
 import { Tools } from "./toolShop";
 
 window.readTimer = new Timer();
+
+
 $(document).ready(function () {
     showNewExample();
 
@@ -15,7 +17,7 @@ $(document).ready(function () {
 function loadAudio() {
     $("#reading-audio").attr("src", Tools.getAudioUrl(localStorage.getItem("currentExample")))
 
-    console.log(Tools.getAudioUrl(localStorage.getItem("currentExample")));
+    //console.log(Tools.getAudioUrl(localStorage.getItem("currentExample")));
 
     document.querySelector("#reading-speaker").addEventListener("click", function () {
         document.querySelector("#reading-audio").play();
@@ -32,8 +34,10 @@ async function showNewExample() {
     //get data from db
     let examplesData = await dictionary.getNewExampleSen(word)
 
-    let sen = examplesData["example"];
+    let id = examplesData["id"]
+    localStorage.setItem("currentExampleID", id)
 
+    let sen = examplesData["example"];
     localStorage.setItem("currentExample", sen)
 
     loadAudio();

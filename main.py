@@ -211,5 +211,13 @@ def putCachePosition():
     return dict
 
 
+@app.route('/chat', methods=["POST"])
+def postMsg():
+    jsonData = request.json
+    messagesList = jsonData["messages"]
+    dict = dictionary.postChatMessage(messagesList)
+    return dict
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='localhost', port="5000")

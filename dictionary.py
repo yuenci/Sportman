@@ -13,6 +13,7 @@ import DB
 import os
 import config
 import datetime
+import AI
 
 
 '''获取一个sql 连接
@@ -336,7 +337,7 @@ def createExampleRecord(word, examplesList):
 def getNewExample(word):
     conn = getConn()
     cursor = conn.cursor()
-    sql = f"SELECT examples,listening,speaking,reading,writing FROM examples_data WHERE word = '{word}';"
+    sql = f"SELECT examples,listening,speaking,reading,writing,id FROM examples_data WHERE word = '{word}';"
     try:
         cursor.execute(sql)
         res = cursor.fetchall()
@@ -347,9 +348,12 @@ def getNewExample(word):
         resList = []
         for ele in res:
             if(not (ele[1] and ele[2] and ele[3] and ele[4])):
-                resList.append(ele[0])
+                resList.append([ele[0], ele[5]])
+        ranExample = random.choice(resList)
 
-        return {"example": random.choice(resList)}
+        return {"example": ranExample[0],
+                "id": ranExample[1]
+                }
 
     except pymysql.Error as e:
         conn.rollback()
@@ -364,14 +368,13 @@ def getNewExample(word):
 
 
 def updateDuration(jsondata):
-    pprint(jsondata)
-    word = jsondata["word"]
-    example = jsondata["example"]
+    # pprint(jsondata)
+    id = jsondata["id"]
     type1 = jsondata["type"]
     duration = jsondata["duration"]
     conn = getConn()
     cursor = conn.cursor()
-    sql = f"UPDATE examples_data SET {type1} ={type1}+ {duration} WHERE examples =  '{example}' AND word = '{word}';"
+    sql = f"UPDATE examples_data SET {type1} ={type1}+ {duration} WHERE id =  '{id}';"
     print(sql)
     try:
         cursor.execute(sql)
@@ -753,3 +756,7 @@ def putCachePositionToFile(position):
 
 
 # putCachePositionToFile(r"E:\test")
+
+def postChatMessage(messageList):
+    res = AI.chat(messageList)
+    return res

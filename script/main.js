@@ -50,9 +50,14 @@ import { TP } from "./textProcess.js"
 // $("#rlayer").append($(`${Html.logoMenuAccount()}`))
 // new LogoMAccount();
 
+// $.mynamespace = {
+//     myVar: "something",
+//     myVar2: "somethingElse"
+// };
+
 // $("#test-btn").css("display", "inline-block")
 // $("#test-btn").click(function () {
-//     Tools.senNumChange(1)
+//     console.log($.mynamespace.myVar);
 // });
 
 
