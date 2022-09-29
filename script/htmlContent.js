@@ -295,6 +295,15 @@ class Html {
         <div>"
         `
     }
+
+    static exampleItem(key, exampleContent) {
+        return `<div class='input-item'>
+                    <input type="checkbox" id="${key}" class="examplesSen magic-checkbox">
+                    <label for="${key}">${exampleContent}</label>
+                </div>`
+    }
+
+
 }
 
 export { Html };

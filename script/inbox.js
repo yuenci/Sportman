@@ -109,17 +109,26 @@ class Inbox {
                 closeBtn: 0,
                 content: `../html/addBatch.html`,
                 end: function () {
-                    console.log("import batch cancel");
+                    console.log("import batch cancel1");
                     setTimeout(() => Content.addAllDESC(), 1000);
+                    Inbox.showAddBatchProcess();
                 }
 
             });
-
-            // layer.close(index, function () {
-            //     console.log("import batch cancel");
-            //     Content.addAllDESC();
-            // });
         })
+    }
+
+    static showAddBatchProcess() {
+        let addBatchStatus = localStorage.getItem("addBatchStatus");
+        if (addBatchStatus === "true") {
+            $("#inbox-add-batch-process").css("display", "inline-block");
+            $("#inbox-add-batch").css("display", "none");
+            setTimeout(() => {
+                $("#inbox-add-batch-process").css("display", "none");
+                $("#inbox-add-batch").css("display", "inline-block");
+            }, 3000);
+            localStorage.setItem("addBatchStatus", "false");
+        }
     }
 }
 

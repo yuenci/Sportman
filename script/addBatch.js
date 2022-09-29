@@ -1,5 +1,6 @@
 import { dictionary } from "./dictionary.js";
 import { Content } from "./contentObj.js";
+import { Tools } from "./toolShop.js";
 
 function frameClose() {
     var index = parent.layer.getFrameIndex(window.name);
@@ -154,11 +155,11 @@ function sendSensToDB() {
         title: 'Import cards',
         btn: ['confirm', 'cancel'] //按钮
     }, function () {
+        localStorage.setItem("addBatchStatus", "true");
         dictionary.addBatchSentences(getAllSentence()).then(data => {
-            console.log(data)
+            // console.log(data)
             layer.close(index);
             if (data["msg"] === "success") {
-                console.log("hi");
                 frameClose();
             } else {
                 layer.msg("Import failed")

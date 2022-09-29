@@ -121,6 +121,8 @@ class Tools {
         }
         return emojyStr
     }
+
+    static addBatchStatus = false
 }
 
 export { Tools };

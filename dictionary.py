@@ -1,3 +1,4 @@
+import multiprocessing
 from faker import Faker
 import pickle
 import pymysql
@@ -492,6 +493,7 @@ def matchWord(word):
 
 
 def createWordExpalinCache(sentence):
+    # print(sentence)
     words = sentence.split(" ")
     for ele in words:
         word = matchWord(ele)
@@ -786,13 +788,10 @@ def postChatMessage(messageList):
     return res
 
 
-def getBatchSentence(sentenceList):
-    print(sentenceList)
+def storeBatchToDB(sentenceList):
     valueList = []
     for sen in sentenceList:
         valueList.append([sen])
-        # createWordExpalinCache(sen)
-
     res = DB.insert(
         tableName="inbox_sentences",
         colNames=["sentence"],
@@ -802,6 +801,39 @@ def getBatchSentence(sentenceList):
         return {"msg": "success"}
     else:
         return {"error": "can't insert sentences to DB"}
+
+
+def createWordsCache(sentenceList):
+    for sen in sentenceList:
+        createWordExpalinCache(sen)
+
+
+def getBatchSentence(sentenceList):
+    func1_process = multiprocessing.Process(
+        target=storeBatchToDB, args=(sentenceList,))
+    func2_process = multiprocessing.Process(
+        target=createWordsCache, args=(sentenceList,))
+    func1_process.start()
+    func2_process.start()
+    return {"msg": "success"}
+
+
+# def getBatchSentence(sentenceList):
+#     #print(sentenceList)
+#     valueList = []
+#     for sen in sentenceList:
+#         valueList.append([sen])
+#         # createWordExpalinCache(sen)
+
+#     res = DB.insert(
+#         tableName="inbox_sentences",
+#         colNames=["sentence"],
+#         values=valueList
+#     )
+#     if(res):
+#         return {"msg": "success"}
+#     else:
+#         return {"error": "can't insert sentences to DB"}
 
 
 def getStreakData():

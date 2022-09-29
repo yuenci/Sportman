@@ -1,5 +1,7 @@
 import { Tools } from "./toolShop";
 import { dictionary } from "./dictionary"
+import { Html } from "./htmlContent";
+
 
 
 $(document).ready(function () {
@@ -16,8 +18,7 @@ async function getExamplesFromDB() {
     //get data from db
     let examplesData = await dictionary.getExamples(word)
     localStorage.setItem("currentExamplesData", JSON.stringify(examplesData))
-    // console.log("examples page init2222222");
-    // console.log(examplesData);
+
     $("#examples-word").text(Tools.getUpperWord(word));
     layer.close(index);
 
@@ -26,10 +27,7 @@ async function getExamplesFromDB() {
     for (const key of keys) {
         if (examplesData[key]["display"]) {
             const exampleContent = examplesData[key]["content"].replaceAll("--", "'");
-            $("#examples-app").append($(`<div class='input-item'>
-                                            <input type="checkbox" id="${key}" class="examplesSen magic-checkbox">
-                                            <label for="${key}">${exampleContent}</label>
-                                        </div>`));
+            $("#examples-app").append(Html.exampleItem(key, exampleContent));
         }
     }
 }

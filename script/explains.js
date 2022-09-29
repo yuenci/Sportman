@@ -20,17 +20,21 @@ async function getExplainsFromDB() {
         return
     }
     else {
-        $("#explains-word").text(word);
+        //$("#explains-word").text(word);
         layer.close(index);
-        for (const ele of data) {
-            let $ele = $(`${ele}`)
-            $("#explains-app").append($ele)
-            $ele.find(".switch_children").click(function () {
-                $(this).children(".cn_txt").toggleClass("cn_txt_show");
-            })
-        }
+        displayDataToFrame(data);
     }
 
 }
 
+function displayDataToFrame(data) {
+    for (const ele of data) {
+        let $ele = $(`${ele}`)
+        $("#explains-app").append($ele)
+        $ele.find(".switch_children").click(function () {
+            $(this).children(".cn_txt").toggleClass("cn_txt_show");
+        })
+    }
+}
 
+// function addExplains
