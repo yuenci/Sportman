@@ -59,6 +59,16 @@ def getExp():
     dict = dictionary.getExplain(word)
     return dict
 
+# 提前缓存解释
+
+
+@app.route('/explains/cache', methods=["POST"])
+def postExplainToCache():
+    jsonData = request.json
+    sentence = jsonData["sentence"]
+    dict = dictionary.createWordExpalinCache(sentence)
+    return dict
+
 # 获取全部例子
 
 
@@ -133,7 +143,7 @@ def getStatus():
 @app.route('/examples/streak', methods=["GET"])
 def getStreak():
     dict = dictionary.getStreakData()
-    print(dict)
+    # print(dict)
     return dict
 
 # 储存新的句子
@@ -161,8 +171,10 @@ def deleteSentence():
 
 @app.route('/sentences/batch', methods=["POST"])
 def postBatchSens():
+    print("yes")
     jsonData = request.json
     sentencesList = jsonData["sentences"]
+    print(sentencesList)
     dict = dictionary.getBatchSentence(sentencesList)
     return dict
 

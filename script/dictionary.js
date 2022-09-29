@@ -204,6 +204,7 @@ class dictionary {
     }
 
     static async addBatchSentences(sentencesList) {
+        console.log(sentencesList);
         let data = await Http.postRequeste(
             "/sentences/batch",
             { "sentences": sentencesList }
@@ -215,6 +216,14 @@ class dictionary {
         let data = await Http.getRequeste(
             "/examples/streak",
             { "type": "streak" }
+        )
+        return data
+    }
+
+    static async storeSentenceWordsToCache(sentence) {
+        let data = await Http.postRequeste(
+            "/explains/cache",
+            { "sentence": sentence }
         )
         return data
     }

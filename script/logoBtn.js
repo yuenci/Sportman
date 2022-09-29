@@ -43,7 +43,7 @@ class LogoButton {
 
     displayStreak() {
         dictionary.getStreak().then((data) => {
-            console.log(data);
+            //console.log(data);
             let num = data.number
             $("#logo-userName").before(`<span id='logo-streak'>${Tools.numberToEmojy(num)}</span>`)
         })

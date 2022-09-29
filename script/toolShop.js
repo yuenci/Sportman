@@ -64,10 +64,14 @@ class Tools {
         var today = new Date(nowDate + offset_GMT * 60 * 1000 + timezone * 60 * 60 * 1000);
 
         //获取日期
-        var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        var date = today.getFullYear() + "-"
+            + String((today.getMonth() + 1)).padStart(2, '0')
+            + "-" + String(today.getDate()).padStart(2, '0');
 
         //获取时间
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var time = String(today.getHours()).padStart(2, '0') + ":"
+            + String(today.getMinutes()).padStart(2, '0') + ":"
+            + String(today.getSeconds()).padStart(2, '0');
 
         return `${date} ${time}`
     }

@@ -66,3 +66,11 @@
     color: white;
     cursor: pointer;
 }
+
+#sentence-process-icon {
+    color: green;
+    display: inline-block;
+    margin-left: 20px;
+    position: relative;
+    bottom: 1px;
+}

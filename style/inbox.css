@@ -83,6 +83,7 @@
     width: 30px;
     line-height: 30px;
     text-align: center;
+    display: inline-block;
 }
 
 #inbox-add-batch:hover {
@@ -98,4 +99,14 @@
 .inbox-tools {
     /* display: inline-block; */
     display: none;
+}
+
+#inbox-add-batch-process {
+    display: inline-block;
+    display: none;
+}
+
+#inbox-process-icon {
+    display: inline-block;
+    color: green;
 }

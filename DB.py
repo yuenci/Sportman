@@ -153,7 +153,7 @@ def select(tableName, colNames="*", whereCon="", byCon=""):
     where = "" if whereCon == "" else "WHERE "+whereCon
 
     sql = f"SELECT {','.join(colNames)} FROM {tableName} {where} {byCon};"
-    print(sql)
+    # print(sql)
     try:
         cursor.execute(sql)
         data = cursor.fetchall()

@@ -16,7 +16,7 @@ class Inbox {
     create() {
         $("#inbox-in").append($(`${this.content}`))
         this.inboxTextAreaEvent();
-        this.enterBtnPressEvent();
+        this.enterBtnClickEvent();
         this.addBatchEvent();
     }
 
@@ -62,12 +62,13 @@ class Inbox {
         });
     }
 
-    enterBtnPressEvent() {
+    enterBtnClickEvent() {
         $("#enter-btn").click(function () {
             let inboxValue = $("#inbox-ta").val()
             let inboxWords = inboxValue.split(" ")
             let inboxTagsList = []
 
+            // check if the words are tags
             let TagMInstance = new TagM();
             for (const word of inboxWords) {
                 let inboxTags = TP.tagCheck(word)
@@ -79,11 +80,13 @@ class Inbox {
             }
 
             if (inboxValue) {
+                // post tags to db
                 dictionary.postNewTag(inboxTagsList)
 
+                // post sen to db
                 dictionary.postSentenceTODB(inboxValue).then(function (data) {
-                    console.log(data);
-                    let newSen = new sentence(inboxValue, Tools.getDateTime(), data.id);
+                    //console.log(data);
+                    let newSen = new sentence(inboxValue, Tools.getDateTime(), data.id, true);
                     Content.addDESC(newSen);
                     $("#inbox-ta").val("");
                     $("#enter-btn").css("background-color", "#cecece");
@@ -105,7 +108,17 @@ class Inbox {
                 shade: [0.95, '#000'],
                 closeBtn: 0,
                 content: `../html/addBatch.html`,
+                end: function () {
+                    console.log("import batch cancel");
+                    setTimeout(() => Content.addAllDESC(), 1000);
+                }
+
             });
+
+            // layer.close(index, function () {
+            //     console.log("import batch cancel");
+            //     Content.addAllDESC();
+            // });
         })
     }
 }

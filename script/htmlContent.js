@@ -63,6 +63,9 @@ class Html {
         <div id="inbox-toolbar">
             <div id="inbox-tools-container">
                 <div id="inbox-add-batch"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                <div id="inbox-add-batch-process">
+                    <i class="fa fa-circle-o-notch fa-spin" id="inbox-process-icon" aria-hidden="true"></i>
+                </div>
                 <button class="inbox-tools">👆</button>
                 <button class="inbox-tools">👆</button>
             </div>

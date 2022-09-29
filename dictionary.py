@@ -1,4 +1,3 @@
-from multiprocessing.sharedctypes import Value
 from faker import Faker
 import pickle
 import pymysql
@@ -39,14 +38,13 @@ return:包含多个example的span元素
 
 
 def getHtmlDataFromMDX(wordInput):
-    # TODO word doesn't exist in MDX
     filename = "dictMdx/O7.mdx"
     headwords = [*MDX(filename)]
     items = [*MDX(filename).items()]
-    if len(headwords) == len(items):
-        print(f'加载成功：共{len(headwords)}条')
-    else:
-        print(f'【ERROR】加载失败{len(headwords)}, {len(items)}')
+    # if len(headwords) == len(items):
+    #     print(f'加载成功：共{len(headwords)}条')
+    # else:
+    #     print(f'【ERROR】加载失败{len(headwords)}, {len(items)}')
     queryWord = wordInput
     global ifWordExistInMDX
     try:
@@ -474,8 +472,33 @@ def postSentencesToDB(sentence):
         conn.close()
 
 
-def storeTagToDB(tag):
-    pass
+def matchWord(word):
+    regexWord = r"^[a-zA-Z]+$"
+    regexWordAndPunc = r"^[a-zA-Z]+\D$"
+    regexPuncAndWord = r"^\D[a-zA-Z]+$"
+
+    if re.search(regexWord, word):
+        #print("🔵: " + word)
+        return word
+    elif re.search(regexWordAndPunc, word):
+        #print("🔵🔘: " + word + " " + word[:-1])
+        return word[:-1]
+    elif re.search(regexPuncAndWord, word):
+        #print("🔘🔵 " + word + " " + word[1:])
+        return word[1:]
+    else:
+        #print("❌: " + word)
+        return None
+
+
+def createWordExpalinCache(sentence):
+    words = sentence.split(" ")
+    for ele in words:
+        word = matchWord(ele)
+        if(word):
+            word = word.lower()
+            getExplain(word)
+    return {"msg": "success"}
 
 
 def querySentencesFromDB(type, word):
@@ -764,9 +787,11 @@ def postChatMessage(messageList):
 
 
 def getBatchSentence(sentenceList):
+    print(sentenceList)
     valueList = []
     for sen in sentenceList:
         valueList.append([sen])
+        # createWordExpalinCache(sen)
 
     res = DB.insert(
         tableName="inbox_sentences",
@@ -792,6 +817,3 @@ def getStreakData():
         else:
             break
     return {"number": i}
-
-
-getStreakData()

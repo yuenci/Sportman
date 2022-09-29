@@ -155,10 +155,10 @@ function sendSensToDB() {
         btn: ['confirm', 'cancel'] //按钮
     }, function () {
         dictionary.addBatchSentences(getAllSentence()).then(data => {
-            //console.log(data)
+            console.log(data)
             layer.close(index);
             if (data["msg"] === "success") {
-                Content.addAllDESC();
+                console.log("hi");
                 frameClose();
             } else {
                 layer.msg("Import failed")

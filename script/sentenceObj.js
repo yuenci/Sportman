@@ -5,13 +5,15 @@ import { Menu } from "../script/menu"
 import { Content } from './contentObj'
 import { Brand } from "../script/brand"
 import { Html } from "../script/htmlContent"
+import { dictionary } from './dictionary.js'
 
 class sentence {
-    constructor(sen, time, id) {
+    constructor(sen, time, id, cache = false) {
         this.sen = sen;
         this.time = time
         this.id = id;
-        this.$senObj = 123;
+        this.cache = cache;
+        this.$senObj = null;
         this.sentenceContent = Html.sentence(sen, time, id)
 
         return this.init();
@@ -103,6 +105,11 @@ class sentence {
             $("#inbox-ta").val(text)
         });
 
+        //检查是否需要缓存
+        if (this.cache) {
+            this.setSenToDBForCache();
+        }
+
         return $sen
     }
 
@@ -118,14 +125,22 @@ class sentence {
         Menu.senMenuClickEvent($(this));
     }
 
-    deleteSen() {
-        // let $sen = $(".sentence");
-        // $sen.remove();
-        console.log(this);
+
+    setSenToDBForCache() {
+
+        let $icon = $(`<i class="fa fa-circle-o-notch fa-spin"
+            id="sentence-process-icon" aria-hidden="true"></i>`);
+        this.$senObj.find(".sentence-upper-time").append($icon);
+        $icon = this.$senObj.find(".fa-circle-o-notch");
+
+        dictionary.storeSentenceWordsToCache(this.sen).then(function (data) {
+            if (data.msg === "success") {
+                // console.log("sentence words stored to cache");
+                $icon[0].style.display = "none";
+            }
+        })
     }
 
 }
-
-
 
 export { sentence };
