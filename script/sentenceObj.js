@@ -32,10 +32,13 @@ class sentence {
 
         //给word 添加事件
         $sen.find(".main-word").each(function () {
+            $(this).bind("contextmenu", function () {
+                return false;
+            })
+
             $(this).click(function () {
                 let word = $(this).text().trim().toLowerCase()
                 localStorage.setItem("currentWord", word);
-
                 Tools.ifstartedLearing(word).then(function (status) {
                     //console.log(status);
                     if (status) {
@@ -47,10 +50,20 @@ class sentence {
                     PracticeLayer.show();
                 })
             })
+
+            $(this).mousedown(function (e) {
+                if (e.which === 3) {
+                    console.log("right click contextmenu");
+                }
+            })
         })
 
         // 给word punctuation 添加事件
         $sen.find(".main-word-punc").each(function () {
+            $(this).bind("contextmenu", function () {
+                return false;
+            })
+
             $(this).click(function () {
                 let word = $(this).text().trim().toLowerCase()
                 let text = word.substring(0, word.length - 1);
@@ -66,6 +79,12 @@ class sentence {
                     PracticeLayer.show();
                 })
             })
+
+            $(this).mousedown(function (e) {
+                if (e.which === 3) {
+                    console.log("right click contextmenu");
+                }
+            })
         })
 
         //给纯tag 添加事件
@@ -79,6 +98,10 @@ class sentence {
                 Content.queryAllDESC(text);
                 let brand = new Brand();
                 brand.showTag(textWithoutPound)
+            })
+
+            $senJQObj.bind("contextmenu", function () {
+                return false;
             })
         })
 
@@ -95,6 +118,10 @@ class sentence {
                 let brand = new Brand();
                 brand.showTag(textWithoutPound)
             })
+
+            $senJQObj.bind("contextmenu", function () {
+                return false;
+            })
         })
 
         //给句子加双击事件
@@ -104,6 +131,11 @@ class sentence {
             //console.log(text);
             $("#inbox-ta").val(text)
         });
+
+        //屏蔽句子的右键菜单
+        $sen.bind("contextmenu", function () {
+            return false;
+        })
 
         //检查是否需要缓存
         if (this.cache) {

@@ -31,3 +31,7 @@ async function getExamplesFromDB() {
         }
     }
 }
+
+$("#add-custom-examples").click(function () {
+    $("#input-item-custom-container").prepend(Html.newExampleItem());
+})

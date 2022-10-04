@@ -13,19 +13,28 @@ class Examples {
 
         let choosed = false;
 
-        //console.log(window.examplesData);
-
         //对于所有的input对象执行
+        //选中的项目的文本内容加入到examplesSelected中
+        //没选中的将examplesData中的display设置为false
         senObj.each(function () {
-            if ($(this).is(':checked')) {
+            let $this = $(this);
+            if ($this.is(':checked')) {
                 choosed = true;
-                let $checkbox = $(this)
-                examplesSelected["examples"].push($checkbox.get(0).nextElementSibling.textContent)
+                let $checkbox = $this
+                let contentText = $checkbox.get(0).nextElementSibling.textContent;
+                examplesSelected["examples"].push(contentText)
+                if ($this.hasClass('exampleNew')) {
+                    examplesData[$this.attr("id")] = {
+                        "content": contentText,
+                        "display": true
+                    }
+                }
             } else {
-                let $checkbox = $(this)
+                let $checkbox = $this
                 examplesData[$checkbox.attr("id")]["display"] = false
             }
         })
+
 
         //console.log(window.examplesData);
         let newExamplesData = {
@@ -33,6 +42,7 @@ class Examples {
             "examples": examplesData
         }
 
+        // 如果没有选中的例句，就不会执行下面的代码
         if (choosed) {
             const resultArray = await Promise.all([
                 dictionary.updateExamplesDisplay(newExamplesData),

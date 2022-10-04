@@ -10,6 +10,24 @@
     /* background-color: gray; */
 }
 
-/* input:checked+label {
-    background-color: #fafafa;
-} */
+#input-item-custom-icon {
+    width: 100%;
+    text-align: center;
+    height: 50px;
+}
+
+#add-custom-examples {
+    width: 30px;
+    line-height: 50px;
+    font-size: 29px;
+    /* border-bottom: solid 1px #e8e8e8; */
+    /* padding: 10px; */
+    margin: auto;
+    color: #c0c0c0;
+    display: inline-block;
+}
+
+#add-custom-examples:hover {
+    color: #a0a0a0;
+    cursor: pointer;
+}

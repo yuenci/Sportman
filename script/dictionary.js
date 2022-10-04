@@ -227,6 +227,25 @@ class dictionary {
         )
         return data
     }
+
+    static async getNotes(word) {
+        let data = await Http.getRequeste(
+            "/explains/note",
+            { "word": word }
+        )
+        return data
+    }
+
+    static async postNotesToDB(word, notes) {
+        let data = await Http.postRequeste(
+            "/explains/note",
+            {
+                "word": word,
+                "notes": notes
+            }
+        )
+        return data
+    }
 }
 
 export { dictionary };

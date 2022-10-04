@@ -55,7 +55,7 @@ def restoreSen():
 @app.route('/explains', methods=["GET"])
 def getExp():
     word = request.args["word"]
-    print("🗺️ router>" + word)
+    #print("🗺️ router>" + word)
     dict = dictionary.getExplain(word)
     return dict
 
@@ -67,6 +67,24 @@ def postExplainToCache():
     jsonData = request.json
     sentence = jsonData["sentence"]
     dict = dictionary.createWordExpalinCache(sentence)
+    return dict
+
+# 获取解释的笔记
+
+
+@app.route('/explains/note', methods=["GET"])
+def getExpNote():
+    word = request.args["word"]
+    dict = dictionary.getExplainNotes(word)
+    return dict
+
+# 创建或者更新笔记
+
+
+@app.route('/explains/note', methods=["POST"])
+def postExpNote():
+    jsonData = request.json
+    dict = dictionary.postExpalinNoteToDB(jsonData)
     return dict
 
 # 获取全部例子

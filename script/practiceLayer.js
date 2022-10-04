@@ -1,6 +1,7 @@
 import { Tools } from "./toolShop";
 import { Examples } from "./examples";
 import { dictionary } from "./dictionary";
+import { Explains } from "./explains";
 
 export class PracticeLayer {
 
@@ -33,8 +34,17 @@ export class PracticeLayer {
                 boxobj.addEventListener("click", function () {
                     let currPage = localStorage.getItem("currentPage");
                     if (currPage == "explains") {
-                        layer.iframeSrc(index, "../html/examples.html");
-                        localStorage.setItem("currentPage", "examples");
+                        Explains.explainNextBtnClickEvent(layer.getChildFrame('#explains-note-ta', index)).then(
+                            function (data) {
+                                if (data) {
+                                    layer.iframeSrc(index, "../html/examples.html");
+                                    localStorage.setItem("currentPage", "examples");
+                                }
+                                else {
+                                    layer.msg("can't insert notes to DB");
+                                }
+                            }
+                        )
                     } else if (currPage == "examples") {
                         Examples.exampleNextBtnClickEvent(layer.getChildFrame('.examplesSen', index)).then(
                             function (choosed) {

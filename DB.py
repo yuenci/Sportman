@@ -176,10 +176,10 @@ raise: arguments have mistakes
 '''
 
 
-def update(tableName, dictData, WhereCon="000"):
+def update(tableName, dictData, whereCon="000"):
     Tool.jsonVerify(dictData)
 
-    sql = f"UPDATE {tableName} SET {Tool.dictDataFormat(dictData)} where {WhereCon}"
+    sql = f"UPDATE {tableName} SET {Tool.dictDataFormat(dictData)} where {whereCon}"
 
     conn = Tool.getConn()
     cursor = conn.cursor()

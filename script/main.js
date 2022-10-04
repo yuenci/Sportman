@@ -46,6 +46,14 @@ new Shop();
 import { Rlayer } from "./rightlayer.js";
 import { Http } from "./http.js"
 import { TP } from "./textProcess.js"
+
+//layout
+import { Layout } from "./layout.js";
+new Layout();
+
+
+
+
 // new Rlayer().show();
 // $("#rlayer").append($(`${Html.logoMenuAccount()}`))
 // new LogoMAccount();

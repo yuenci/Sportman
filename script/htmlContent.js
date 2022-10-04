@@ -1,4 +1,5 @@
 import { TP } from './textProcess.js'
+import { Tools } from './toolShop.js';
 class Html {
     static shop = `
         <div id="shop-container">
@@ -300,6 +301,15 @@ class Html {
         return `<div class='input-item'>
                     <input type="checkbox" id="${key}" class="examplesSen magic-checkbox">
                     <label for="${key}">${exampleContent}</label>
+                </div>`
+    }
+
+    static newExampleItem() {
+        let key = Tools.getRamdomInt(10000, 999999)
+
+        return `<div class='input-item'onclick="return false">
+                    <input type="checkbox" id="${key}" class="examplesSen magic-checkbox exampleNew" checked>
+                    <label for="${key}" contenteditable="true">input</label>
                 </div>`
     }
 

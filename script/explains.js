@@ -1,12 +1,18 @@
 import { dictionary } from './dictionary'
 
 $(document).ready(function () {
-    getExplainsFromDB();
+    let word = localStorage.getItem("currentWord")
+    getExplainsFromDB(word);
+    getNotesFromDB(word);
 })
 
-async function getExplainsFromDB() {
+
+
+
+
+async function getExplainsFromDB(word) {
     //console.log("explain page init");
-    let word = localStorage.getItem("currentWord")
+
     //console.log(`currentWord is ${word}`);
 
     var index = layer.load(2, {
@@ -27,6 +33,18 @@ async function getExplainsFromDB() {
 
 }
 
+async function getNotesFromDB(word) {
+    let data = await dictionary.getNotes(word)
+    if (data["error"] === "can't get notes to DB") {
+        layer.msg("can't get notes to DB");
+        return
+    }
+    else {
+        $("#explains-note-ta").val(data["notes"]);
+
+    }
+}
+
 function displayDataToFrame(data) {
     for (const ele of data) {
         let $ele = $(`${ele}`)
@@ -37,4 +55,18 @@ function displayDataToFrame(data) {
     }
 }
 
-// function addExplains
+class Explains {
+    static async explainNextBtnClickEvent($textArea) {
+        let word = localStorage.getItem("currentWord")
+        let explains = $textArea.val();
+        let data = await dictionary.postNotesToDB(word, explains)
+        if (data["msg"] === "success") {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}
+
+export { Explains }

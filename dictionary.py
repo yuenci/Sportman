@@ -117,7 +117,7 @@ return：None
 def storeDataToDB(word, data):
     conn = getConn()
     cursor = conn.cursor()
-    sql = f"INSERT INTO word_examples values ('{word}','{data}')"
+    sql = f"INSERT INTO word_examples (word,examples) values ('{word}','{data}')"
     try:
         cursor.execute(sql)
         conn.commit()
@@ -177,12 +177,12 @@ def getExistExamplesFromDB(word):
 
 
 def queryData(word):
-    # print(f"👉👉👉{word}")
+    print(f"👉👉👉{word}")
     if(ifWordExapmleExist(word)):
         print("exist")
         return getExistExamplesFromDB(word)
     else:
-        # print("new one")
+        print("new one")
         try:
             html = getHtmlDataFromMDX(word)
             if(ifWordExistInMDX):
@@ -751,7 +751,7 @@ def updateTag(jsonData):
     res = DB.update(
         tableName="tags",
         dictData={"pined": pined},
-        WhereCon=f"tag = '{tag}'"
+        whereCon=f"tag = '{tag}'"
     )
     if(res):
         return {"msg": "success"}
@@ -849,3 +849,46 @@ def getStreakData():
         else:
             break
     return {"number": i}
+
+
+def getExplainNotes(word):
+    data = DB.select(
+        tableName="explain_notes",
+        colNames=["notes"],
+        whereCon=f"word='{word}'"
+    )
+    if(data):
+        return {"notes": data[0][0]}
+    else:
+        return {"error": "can't get notes to DB"}
+
+
+def postExpalinNoteToDB(jsonData):
+    word = jsonData["word"]
+    notes = jsonData["notes"]
+
+    data = DB.select(
+        tableName="explain_notes",
+        colNames=["notes"],
+        whereCon=f"word='{word}'"
+    )
+
+    res = None
+
+    if(data):
+        res = DB.update(
+            tableName="explain_notes",
+            dictData={"notes": notes},
+            whereCon=f"word='{word}'"
+        )
+    else:
+        res = DB.insert(
+            tableName="explain_notes",
+            colNames=["word", "notes"],
+            values=[[word, notes]]
+        )
+
+    if(res):
+        return {"msg": "success"}
+    else:
+        return {"error": "can't insert notes to DB"}
