@@ -4,7 +4,7 @@
 
 ![1675164931813](image/README/1675164931813.png)
 
-This product uses the supervised learning strategy commonly used in machine learning to learn English. This idea comes from [yjango ](https://www.zhihu.com/people/yjango's): [Sports Learning](https://zhuanlan.zhihu.com/p/52208883),this theory emphasize the connection from input to output by feeling, and then form muscle memory.
+This product uses the supervised learning strategy commonly used in machine learning to learn English. This idea comes from [yjango ](https://www.zhihu.com/people/yjango's): [Implicit Learning](https://zhuanlan.zhihu.com/p/52208883),this theory emphasize the connection from input to output by feeling, and then form muscle memory.
 
 ## 💻 Prerequisites
 
