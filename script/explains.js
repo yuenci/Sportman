@@ -36,7 +36,7 @@ async function getExplainsFromDB(word) {
 async function getNotesFromDB(word) {
     let data = await dictionary.getNotes(word)
     if (data["error"] === "can't get notes to DB") {
-        layer.msg("can't get notes to DB");
+        //layer.msg("can't get notes to DB");
         return
     }
     else {

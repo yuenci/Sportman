@@ -25,11 +25,17 @@ $ yarn dev
 
 ## ☕ Usecase
 
-1. Add a sentence
+### 1. Add a sentence
 ![1675165946532](image/README/1675165946532.gif)
 
+### 2. Learn a word
+![1675166437088](image/README/1675166437088.gif)
 
-Add execution commands and examples that you think users will find useful. Provides a reference ofoptions for bonus points!
+### 3. Add a tag
+![1675166675694](image/README/1675166675694.gif)
+
+### 4. Search
+![1675166753226](image/README/1675166753226.gif)
 
 ## 📫 Contributing
 
