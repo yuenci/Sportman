@@ -1,5 +1,6 @@
 import os
 import openai
+# pip install openai
 import config
 
 

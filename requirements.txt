@@ -1,0 +1,8 @@
+beautifulsoup4==4.11.1
+Faker==9.8.0
+flasgger==0.9.5
+Flask==2.0.2
+Flask_Cors==3.0.10
+openai==0.25.0
+PyMySQL==1.0.2
+readmdict==0.1.1
